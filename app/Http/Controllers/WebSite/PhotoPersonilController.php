@@ -137,7 +137,7 @@ class PhotoPersonilController extends Controller
     public function destroy(PhotoPersonil $photo_personil)
     {
         if ($photo_personil->image) {
-            $imagePath = base_path('images/photo-personil/' . $photo_personil->image);
+            $imagePath = public_path('images/photo-personil/' . $photo_personil->image);
 
             // Periksa dan hapus file image
             if (file_exists($imagePath)) {

@@ -40,7 +40,7 @@ class LogoJurusanDataTable extends DataTable
             ->addColumn('logo', function ($row) {
 
                 // Tentukan path foto dari database
-                $imagePath = base_path('images/jurusan_logo/' . $row->logo);
+                $imagePath = public_path('images/jurusan_logo/' . $row->logo);
                 $logoPath = '';
 
                 // Cek apakah file foto ada di folder 'images/personil'

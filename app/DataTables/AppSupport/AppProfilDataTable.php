@@ -32,7 +32,7 @@ class AppProfilDataTable extends DataTable
             })
             ->addColumn('app_icon', function ($row) {
                 // Define the paths
-                $imagePath = base_path('images/' . $row->app_icon);
+                $imagePath = public_path('images/' . $row->app_icon);
                 $iconPath = '';
 
                 // Check if the file exists in the 'images' folder
@@ -48,7 +48,7 @@ class AppProfilDataTable extends DataTable
             })
             ->addColumn('app_logo', function ($row) {
                 // Define the paths
-                $imagePath = base_path('images/' . $row->app_logo);
+                $imagePath = public_path('images/' . $row->app_logo);
                 $logoPath = '';
 
                 // Check if the file exists in the 'images' folder

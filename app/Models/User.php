@@ -57,7 +57,7 @@ class User extends Authenticatable
 
     /* public function getAvatarUrlAttribute()
     {
-        $avatarPath = base_path('images/personil/' . $this->avatar);
+        $avatarPath = public_path('images/personil/' . $this->avatar);
 
         // Cek apakah file avatar ada di folder public/images/personil/
         if ($this->avatar && file_exists($avatarPath)) {

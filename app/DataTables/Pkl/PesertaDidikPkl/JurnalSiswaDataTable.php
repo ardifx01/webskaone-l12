@@ -6,6 +6,7 @@ use App\Models\Pkl\PesertaDidikPkl\JurnalPkl;
 use App\Traits\DatatableHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -31,7 +32,7 @@ class JurnalSiswaDataTable extends DataTable
                 $defaultPhotoPath = asset('images/noimagejurnal.jpg');
 
                 // Tentukan path foto dari database
-                $imagePath = base_path('images/jurnal-2024-2025/' . $row->gambar);
+                $imagePath = public_path('images/jurnal-2024-2025/' . $row->gambar);
                 $gamabrPath = '';
 
                 // Cek apakah file foto ada di folder 'images/personil'
@@ -101,7 +102,7 @@ class JurnalSiswaDataTable extends DataTable
      */
     public function query(JurnalPkl $model): QueryBuilder
     {
-        $nis = auth()->user()->nis; // Ambil NIS dari user yang sedang login
+        $nis = Auth::user()->nis; // Ambil NIS dari user yang sedang login
 
         return $model->newQuery()
             ->select('jurnal_pkls.*', 'peserta_didiks.nama_lengkap', 'peserta_didik_rombels.rombel_nama', 'perusahaans.nama')

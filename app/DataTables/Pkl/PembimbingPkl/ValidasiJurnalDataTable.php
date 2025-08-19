@@ -6,6 +6,7 @@ use App\Models\Pkl\PembimbingPkl\ValidasiJurnal;
 use App\Traits\DatatableHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -31,7 +32,7 @@ class ValidasiJurnalDataTable extends DataTable
                 $defaultPhotoPath = asset('images/noimagejurnal.jpg');
 
                 // Tentukan path foto dari database
-                $imagePath = base_path('images/jurnal-2024-2025/' . $row->gambar);
+                $imagePath = public_path('images/jurnal-2024-2025/' . $row->gambar);
                 $gamabrPath = '';
 
                 // Cek apakah file foto ada di folder 'images/personil'
@@ -134,9 +135,11 @@ class ValidasiJurnalDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
+    /** @var \App\Models\User $user */
+
     public function query(ValidasiJurnal $model): QueryBuilder
     {
-        $id_personil = auth()->user()->personal_id; // Ambil NIS dari user yang sedang login
+        $id_personil = Auth::user()->personal_id; // Ambil NIS dari user yang sedang login
 
         $query = $model->newQuery()
             ->select('jurnal_pkls.*', 'peserta_didiks.nama_lengkap', 'peserta_didik_rombels.rombel_nama', 'perusahaans.nama')

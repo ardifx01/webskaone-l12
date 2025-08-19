@@ -119,7 +119,7 @@ class TeamPengembangController extends Controller
     {
 
         if ($teamPengembang->image) {
-            $imagePath = base_path('images/team/' . $teamPengembang->image);
+            $imagePath = public_path('images/team/' . $teamPengembang->image);
             // Periksa dan hapus file image
             if (file_exists($imagePath)) {
                 unlink($imagePath);

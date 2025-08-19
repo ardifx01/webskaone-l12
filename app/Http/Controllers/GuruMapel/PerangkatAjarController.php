@@ -77,7 +77,7 @@ class PerangkatAjarController extends Controller
             if ($request->hasFile($field)) {
                 // Hapus file lama jika ada
                 if ($existing && $existing->$field) {
-                    $oldPath = base_path($info['folder'] . '/' . $existing->$field);
+                    $oldPath = public_path($info['folder'] . '/' . $existing->$field);
                     if (file_exists($oldPath)) {
                         unlink($oldPath);
                     }

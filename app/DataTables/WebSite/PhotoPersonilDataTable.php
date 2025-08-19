@@ -28,7 +28,7 @@ class PhotoPersonilDataTable extends DataTable
             ->addColumn('photo', function ($row) {
 
                 // Tentukan path foto dari database
-                $imagePath = base_path('images/photo-personil/' . $row->photo);
+                $imagePath = public_path('images/photo-personil/' . $row->photo);
                 $photoPath = '';
 
                 // Cek apakah file foto ada di folder 'images/personil'

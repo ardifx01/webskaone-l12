@@ -15,7 +15,7 @@
         <div class="col-md-4 text-center">
             <h5 class="fs-14 mb-3 mt-4">Logo Jurusan</h5>
             <img id="image-preview"
-                src="{{ $data->logo && file_exists(base_path('images/jurusan_logo/' . $data->logo)) ? asset('images/jurusan_logo/' . $data->logo) : asset('images/1726416161_logosmk-big.png') }}"
+                src="{{ $data->logo && file_exists(public_path('images/jurusan_logo/' . $data->logo)) ? asset('images/jurusan_logo/' . $data->logo) : asset('images/1726416161_logosmk-big.png') }}"
                 width="150" alt="Photo" />
         </div>
         <div class="col-md-4">

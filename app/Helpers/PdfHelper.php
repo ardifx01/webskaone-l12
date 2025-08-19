@@ -8,7 +8,7 @@ class PdfHelper
 {
     public static function uploadPdf($file, $directory, $prefix = '', $dataMeta = [], $oldFileName = null)
     {
-        $baseDir = base_path($directory);
+        $baseDir = public_path($directory);
 
         if (!file_exists($baseDir)) {
             mkdir($baseDir, 0755, true);

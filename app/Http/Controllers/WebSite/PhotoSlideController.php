@@ -113,7 +113,7 @@ class PhotoSlideController extends Controller
     public function destroy(PhotoSlide $photoSlide)
     {
         if ($photoSlide->gambar) {
-            $imagePath = base_path('images/photoslide/' . $photoSlide->gambar);
+            $imagePath = public_path('images/photoslide/' . $photoSlide->gambar);
 
             // Periksa dan hapus file image
             if (file_exists($imagePath)) {
