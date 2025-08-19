@@ -2,7 +2,7 @@
 
 namespace App\Models\ManajemenSekolah;
 
-use App\Models\GuruWali\GuruWaliSiswa;
+use App\Models\ManajemenSekolah\GuruWaliSiswa;
 use App\Models\Kurikulum\DataKBM\PesertaDidikRombel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

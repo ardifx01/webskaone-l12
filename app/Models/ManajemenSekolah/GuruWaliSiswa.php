@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\GuruWali;
+namespace App\Models\ManajemenSekolah;
 
 use App\Models\ManajemenSekolah\PesertaDidik;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

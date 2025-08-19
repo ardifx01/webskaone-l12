@@ -1,12 +1,14 @@
 <?php
 
-namespace App\DataTables\GuruWali;
+namespace App\DataTables\ManajemenSekolah;
 
-use App\Models\GuruWali\GuruWaliSiswa;
+use App\Helpers\ImageHelper;
 use App\Models\Kurikulum\DataKBM\PesertaDidikRombel;
+use App\Models\ManajemenSekolah\GuruWaliSiswa;
+use App\Models\ManajemenSekolah\PesertaDidik;
 use App\Traits\DatatableHelper;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,13 +17,13 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class DataSiswaGuruWaliDataTable extends DataTable
+class GuruWaliSiswaDataTable extends DataTable
 {
     use DatatableHelper;
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param QueryBuilder<GuruWaliSiswa> $query Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -80,6 +82,21 @@ class DataSiswaGuruWaliDataTable extends DataTable
 
                 return '-';
             })
+            ->addColumn('foto', function ($row) {
+                $data = PesertaDidik::where('nis', $row->nis)
+                    ->first();
+                // Menggunakan ImageHelper untuk mendapatkan tag gambar avatar
+                // Pastikan kolom 'foto' ada dalam query
+                return ImageHelper::getAvatarImageTag(
+                    filename: $data->foto,
+                    gender: $data->jenis_kelamin,
+                    folder: 'peserta_didik',
+                    defaultMaleImage: 'siswacowok.png',
+                    defaultFemaleImage: 'siswacewek.png',
+                    width: 50,
+                    class: 'rounded avatar-sm'
+                );
+            })
             ->addColumn('action', function ($row) {
                 // Menggunakan basicActions untuk menghasilkan action buttons
                 $actions = $this->basicActions($row);
@@ -88,18 +105,27 @@ class DataSiswaGuruWaliDataTable extends DataTable
                 return view('action', compact('actions'));
             })
             ->addIndexColumn()
-            ->rawColumns(['tingkat_10', 'tingkat_11', 'tingkat_12', 'pesertadidik', 'action']);
+            ->rawColumns(['tingkat_10', 'tingkat_11', 'tingkat_12', 'pesertadidik', 'foto', 'action']);
     }
 
     /**
      * Get the query source of dataTable.
+     *
+     * @return QueryBuilder<GuruWaliSiswa>
      */
     public function query(GuruWaliSiswa $model): QueryBuilder
     {
-        return $model->newQuery()
+        $query = $model->newQuery()
             ->join('personil_sekolahs', 'personil_sekolahs.id_personil', '=', 'guru_wali_siswas.id_personil')
-            ->select('guru_wali_siswas.*', 'personil_sekolahs.namalengkap', 'personil_sekolahs.gelardepan', 'personil_sekolahs.gelarbelakang')
+            ->select(
+                'guru_wali_siswas.*',
+                'personil_sekolahs.namalengkap',
+                'personil_sekolahs.gelardepan',
+                'personil_sekolahs.gelarbelakang'
+            )
             ->orderBy('personil_sekolahs.namalengkap', 'asc');
+
+        return $query;
     }
 
     /**
@@ -108,7 +134,7 @@ class DataSiswaGuruWaliDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('datasiswaguruwali-table')
+            ->setTableId('guruwalisiswa-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -121,7 +147,7 @@ class DataSiswaGuruWaliDataTable extends DataTable
                 'pageLength' => 15,
                 'paging' => false,
                 'scrollCollapse' => false,
-                'scrollY' => "calc(100vh - 351px)",
+                'scrollY' => "calc(100vh - 341px)",
             ]);
     }
 
@@ -139,6 +165,7 @@ class DataSiswaGuruWaliDataTable extends DataTable
             Column::make('tingkat_11'),
             Column::make('tingkat_12'),
             Column::make('status')->title('Status'),
+            Column::make('foto')->title('Photo'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -152,6 +179,6 @@ class DataSiswaGuruWaliDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'DataSiswaGuruWali_' . date('YmdHis');
+        return 'GuruWaliSiswa_' . date('YmdHis');
     }
 }
