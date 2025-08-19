@@ -13,14 +13,13 @@
 /.zed
 /auth.json
 /node_modules
-/public/build
+/public/images
+/public/perangkat-ajar
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
 /vendor
-/images
-/perangkat-ajar
 Homestead.json
 Homestead.yaml
 Thumbs.db
