@@ -135,12 +135,15 @@
                         @endcan
                     @endforeach
                 @endforeach
-                <li class="menu-title"><span>@lang('translation.about')</span></li>
+                {{-- <li class="menu-title"><span>@lang('translation.about')</span></li> --}}
+                <li class="nav-item mt-3 mb-1" style="border-top: 1px dashed #4379d866; margin:25px 25px 0px 25px;">
+                </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('about*') ? 'active' : '' }}" href="/about">
                         <i class="ri-question-line"></i> <span>@lang('translation.about')</span>
                     </a>
                 </li>
+                <li class="nav-item mt-3 mb-1"></li>
                 @php
                     $isMainMenuActive = App\Helpers\Fitures::isFiturAktif('main-menu-template');
                 @endphp

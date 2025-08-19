@@ -1,3 +1,4 @@
+<li class="menu-title"><span>TEMPLATE VELZON</span></li>
 <li class="menu-title"><span>@lang('translation.menu')</span></li>
 <li class="nav-item">
     <a class="nav-link menu-link {{ Request::is('dashboard_*') ? 'active open' : '' }}" href="#sidebarDashboards"
