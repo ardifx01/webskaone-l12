@@ -39,7 +39,7 @@ cd webskaone-l12
 php artisan app:install
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right"></p>
 
 <br/>
 
