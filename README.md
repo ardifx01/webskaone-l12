@@ -46,6 +46,10 @@ git clone https://github.com/AbdoelMadjid/webskaone-l12.git
 cd webskaone-l12
 ```
 
+```console
+composer install
+```
+
 **2. Jalankan installer final:**
 
 ```console
