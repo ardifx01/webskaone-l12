@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-class MenuPrakerinPesertaSeeder extends Seeder
+class MenuPrakerinPesertaSeeder extends BaseMenuSeeder
 {
     use HasMenuPermission;
     /**
@@ -42,11 +42,17 @@ class MenuPrakerinPesertaSeeder extends Seeder
                 // Hapus relasi menu_permission
                 DB::table('menu_permission')->whereIn('menu_id', $menuIds)->delete();
 
-                // Hapus permissions berdasarkan ID relasi
-                DB::table('permissions')->whereIn('id', $permissionIds)->delete();
+                // 🔹 Cari permissions orphan KHUSUS untuk menu ini
+                $orphanPermissionIds = DB::table('permissions')
+                    ->whereNotIn('id', function ($query) {
+                        $query->select('permission_id')->from('menu_permission');
+                    })
+                    ->whereIn('name', Menu::whereIn('id', $menuIds)->pluck('url')) // exact match
+                    ->pluck('id');
 
-                // 🔹 Pastikan hapus permission yang URL-nya mirip (antisipasi orphan permission)
-                DB::table('permissions')->where('name', 'like', '%siswapesertapkl%')->delete();
+                if ($orphanPermissionIds->isNotEmpty()) {
+                    DB::table('permissions')->whereIn('id', $orphanPermissionIds)->delete();
+                }
 
                 // Hapus menus
                 DB::table('menus')->whereIn('id', $menuIds)->delete();
