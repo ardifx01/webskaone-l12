@@ -138,7 +138,7 @@ class GaleryController extends Controller
     public function destroy(Galery $galery)
     {
         if ($galery->image) {
-            $imagePath = public_path('images/galery/' . $galery->image);
+            $imagePath = base_path('images/galery/' . $galery->image);
 
             // Periksa dan hapus file image
             if (file_exists($imagePath)) {

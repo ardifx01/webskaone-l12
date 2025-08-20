@@ -249,7 +249,7 @@ class CetakRaporController extends Controller
 
         // BARCOOOOOOOOOOOOOOOOOOOOOOOOOOOOD
         $barcode = new DNS1D();
-        $barcode->setStorPath(public_path('barcode/'));
+        $barcode->setStorPath(base_path('barcode/'));
 
         // URL yang ingin dijadikan barcode
         $url = "https://smkn1kadipaten.sch.id";

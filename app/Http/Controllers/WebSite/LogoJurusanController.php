@@ -119,7 +119,7 @@ class LogoJurusanController extends Controller
     public function destroy(LogoJurusan $logo_jurusan)
     {
         if ($logo_jurusan->logo) {
-            $imagePath = public_path('images/jurusan_logo/' . $logo_jurusan->logo);
+            $imagePath = base_path('images/jurusan_logo/' . $logo_jurusan->logo);
 
             // Periksa dan hapus file gambar asli
             if (file_exists($imagePath)) {

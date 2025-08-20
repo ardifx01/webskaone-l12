@@ -26,7 +26,7 @@ class RaporPesertaDidikController extends Controller
     public function index()
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -295,7 +295,7 @@ class RaporPesertaDidikController extends Controller
 
         // BARCOOOOOOOOOOOOOOOOOOOOOOOOOOOOD
         $barcode = new DNS1D();
-        $barcode->setStorPath(public_path('barcode/'));
+        $barcode->setStorPath(base_path('barcode/'));
 
         // URL yang ingin dijadikan barcode
         $url = "https://smkn1kadipaten.sch.id";
@@ -640,7 +640,7 @@ class RaporPesertaDidikController extends Controller
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')->first();
 
         // Ambil data rombongan belajar berdasarkan wali kelas yang login
-        $rombonganBelajar = RombonganBelajar::where('wali_kelas', auth()->user()->personal_id)
+        $rombonganBelajar = RombonganBelajar::where('wali_kelas', Auth::user()->personal_id)
             ->where('tahunajaran', $tahunAjaranAktif->tahunajaran)
             ->first();
 

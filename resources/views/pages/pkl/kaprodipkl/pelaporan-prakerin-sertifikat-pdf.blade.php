@@ -21,7 +21,7 @@
     }
 </style>
 <div id='cetak-sertifikat-pkl' style="position: relative; width: 100%; height: 1000px;">
-    <img src="{{ public_path('sertifikatpkl.jpg') }}"
+    <img src="{{ base_path('sertifikatpkl.jpg') }}"
         style="position: absolute; width: 29.7cm; height: 21cm; z-index: 0; top: 0; left: 0;" />
     <div style="margin-top: 330px;"></div>
     <div style="position: relative; z-index: 1;">
@@ -118,10 +118,10 @@
                         <tr>
                             <td>
                                 {{-- <div>
-                                    <img src='{{ public_path('damudin.png') }}' border='0' height='110'
+                                    <img src='{{ base_path('damudin.png') }}' border='0' height='110'
                                         style=' position: absolute; padding: 0px 2px 15px -200px; margin-left: -120px;margin-top:-15px;'>
                                 </div>
-                                <div><img src='{{ public_path('stempel.png') }}' border='0' height='180'
+                                <div><img src='{{ base_path('stempel.png') }}' border='0' height='180'
                                         width='184'
                                         style=' position: absolute; padding: 0px 2px 15px -650px; margin-left: -135px;margin-top:-50px;'>
                                 </div> --}}

@@ -64,7 +64,7 @@
     <div class='table-responsive'>
         <table style='margin: -20px 0 0 0;width:100%;border-collapse:collapse;font:12px Times New Roman;'>
             <tr>
-                <td align='center'> <img src="{{ public_path('kossurat.jpg') }}" height="154" width="700"
+                <td align='center'> <img src="{{ base_path('images/kossurat.jpg') }}" height="154" width="700"
                         border="0" />
                 </td>
             </tr>
@@ -415,10 +415,10 @@
                     Majalengka, 05 Mei 2025<br>
                     Kepala Sekolah,
                     <div>
-                        <img src='{{ public_path('damudin.png') }}' border='0' height='110'
+                        <img src='{{ base_path('images/damudin.png') }}' border='0' height='110'
                             style=' position: absolute; padding: 0px 2px 15px -200px; margin-left: -120px;margin-top:-15px;'>
                     </div>
-                    <div><img src='{{ public_path('stempel.png') }}' border='0' height='180' width='184'
+                    <div><img src='{{ base_path('images/stempel.png') }}' border='0' height='180' width='184'
                             style=' position: absolute; padding: 0px 2px 15px -650px; margin-left: -135px;margin-top:-50px;'>
                     </div>
                     <p>&nbsp;</p>

@@ -120,7 +120,7 @@ class PhotoJurusanController extends Controller
     {
 
         if ($photoJurusan->image) {
-            $imagePath = public_path('images/jurusan_gmb/' . $photoJurusan->image);
+            $imagePath = base_path('images/jurusan_gmb/' . $photoJurusan->image);
 
             // Periksa dan hapus file gambar asli
             if (file_exists($imagePath)) {

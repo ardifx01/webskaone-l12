@@ -216,7 +216,7 @@ class PesertaDidikController extends Controller
     public function destroy(PesertaDidik $pesertaDidik)
     {
         if ($pesertaDidik->foto) {
-            $imagePath = public_path('images/peserta_didik/' . $pesertaDidik->foto);
+            $imagePath = base_path('images/peserta_didik/' . $pesertaDidik->foto);
             // Periksa dan hapus file image
             if (file_exists($imagePath)) {
                 unlink($imagePath);

@@ -67,14 +67,14 @@ class AppInstall extends Command
         $this->call('key:generate');
 
         // 6. Import database structure
-        $structureFile = public_path('backup/struktur.sql');
+        $structureFile = base_path('backup/struktur.sql');
         if (file_exists($structureFile)) {
             exec("mysql -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} < {$structureFile}");
             $this->info("Database structure imported.");
         }
 
         // 7. Import database data
-        $dataFile = public_path('backup/data.sql');
+        $dataFile = base_path('backup/data.sql');
         if (file_exists($dataFile)) {
             exec("mysql -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} < {$dataFile}");
             $this->info("Database data imported.");

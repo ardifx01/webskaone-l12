@@ -286,8 +286,8 @@ class ProfilPenggunaController extends Controller
         if ($request->hasFile('profile_image')) {
             // Hapus gambar dan thumbnail lama jika ada
             if ($pesertadidik->foto) {
-                $oldImagePath = public_path('images/peserta_didik/' . $pesertadidik->foto);
-                $oldThumbnailPath = public_path('images/thumbnail/' . $pesertadidik->foto);
+                $oldImagePath = base_path('images/peserta_didik/' . $pesertadidik->foto);
+                $oldThumbnailPath = base_path('images/thumbnail/' . $pesertadidik->foto);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
@@ -301,7 +301,7 @@ class ProfilPenggunaController extends Controller
             $pesertadidikName = 'pd_' . time() . '.' . $pesertadidikFile->extension();
 
             // Buat dan simpan thumbnail di `public/images/thumbnail`
-            $destinationPathThumbnail = public_path('images/thumbnail');
+            $destinationPathThumbnail = base_path('images/thumbnail');
             $img = Image::make($pesertadidikFile->path());
 
             // Tentukan persentase ukuran (misalnya 50% dari ukuran asli)
@@ -317,7 +317,7 @@ class ProfilPenggunaController extends Controller
             })->save($destinationPathThumbnail . '/' . $pesertadidikName);
 
             // Simpan gambar asli di `public/images/pesertadidik`
-            $destinationPath = public_path('images/peserta_didik');
+            $destinationPath = base_path('images/peserta_didik');
             $pesertadidikFile->move($destinationPath, $pesertadidikName);
 
             // Perbarui nama file gambar di database

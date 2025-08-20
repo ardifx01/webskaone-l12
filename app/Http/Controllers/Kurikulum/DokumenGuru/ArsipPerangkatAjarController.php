@@ -96,7 +96,7 @@ class ArsipPerangkatAjarController extends Controller
 
         foreach ($fields as $field => $folder) {
             if ($data->$field) {
-                $filePath = public_path($folder . '/' . $data->$field);
+                $filePath = base_path($folder . '/' . $data->$field);
                 if (file_exists($filePath)) {
                     unlink($filePath);
                 }

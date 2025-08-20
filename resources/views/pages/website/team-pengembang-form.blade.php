@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <x-form.input name="photo" type="file" label="Photo" onchange="previewImage(event)" />
             <img id="image-preview"
-                src="{{ $data->photo && file_exists(public_path('images/team/' . $data->photo)) ? asset('images/team/' . $data->photo) : asset('build/images/users/user-dummy-img.jpg') }}"
+                src="{{ $data->photo && file_exists(base_path('images/team/' . $data->photo)) ? asset('images/team/' . $data->photo) : asset('build/images/users/user-dummy-img.jpg') }}"
                 width="150" alt="Photo" />
         </div>
     </div>

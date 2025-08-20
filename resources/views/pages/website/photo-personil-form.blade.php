@@ -26,7 +26,7 @@
                 onchange="previewImage(event)" />
             <h5 class="fs-14 mb-3 mt-4">Photo Personil</h5>
             <img id="image-preview" class="border-double"
-                src="{{ $data->photo && file_exists(public_path('images/photo-personil/' . $data->photo)) ? asset('images/photo-personil/' . $data->photo) : asset('images/welcome/personil/img1.jpg') }}"
+                src="{{ $data->photo && file_exists(base_path('images/photo-personil/' . $data->photo)) ? asset('images/photo-personil/' . $data->photo) : asset('images/welcome/personil/img1.jpg') }}"
                 width="150" alt="Photo" />
         </div>
         <div class="col-md-4"></div>

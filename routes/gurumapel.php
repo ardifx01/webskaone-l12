@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
                 ->name('perangkat-ajar.upload');
 
             Route::get('/perangkat-ajar/preview/{type}/{filename}', function ($type, $filename) {
-                $path = public_path("perangkat-ajar/{$type}/{$filename}");
+                $path = base_path("perangkat-ajar/{$type}/{$filename}");
 
                 if (!file_exists($path)) {
                     abort(404);

@@ -22,7 +22,7 @@ class ImageHelper
      */
     public static function uploadCompressedImage($file, $directory, $oldFileName = null, $maxWidth = 600, $quality = 75, $prefix = '')
     {
-        $publicPath = public_path($directory);
+        $publicPath = base_path($directory);
 
         if (!file_exists($publicPath)) {
             mkdir($publicPath, 0755, true);
@@ -68,7 +68,7 @@ class ImageHelper
         int $width = 50,
         string $class = 'rounded avatar-sm'
     ): string {
-        $imagePath = public_path("images/{$folder}/{$filename}");
+        $imagePath = base_path("images/{$folder}/{$filename}");
 
         $defaultPhotoPath = $gender === 'Laki-laki'
             ? asset("images/{$defaultMaleImage}")
