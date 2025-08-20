@@ -139,7 +139,7 @@ class AppInstall extends Command
         );
 
         // Import structure
-        $structureFile = public_path('backup_db/structure.sql');
+        $structureFile = public_path('backup/struktur.sql');
         if (($importOption == 'struktur saja' || $importOption == 'struktur + data') && file_exists($structureFile)) {
             $this->line("[INFO] Importing database structure...");
             exec("mysql -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} < {$structureFile}");
@@ -150,7 +150,7 @@ class AppInstall extends Command
         $bar->advance();
 
         // Import data
-        $dataFile = public_path('backup_db/data.sql');
+        $dataFile = public_path('backup/data.sql');
         if (($importOption == 'data saja' || $importOption == 'struktur + data') && file_exists($dataFile)) {
             $this->line("[INFO] Importing database data...");
             exec("mysql -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} < {$dataFile}");
