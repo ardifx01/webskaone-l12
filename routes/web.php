@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\About\AboutController;
+use App\Http\Controllers\About\RiwayatAplikasiController;
 use App\Http\Controllers\Pengguna\ProfilPenggunaController;
 use App\Http\Controllers\AppSupport\MenuController;
 use App\Http\Controllers\AppSupport\AppFiturController;
@@ -102,6 +103,7 @@ Route::middleware(['auth'])->get('/return-account', [UserController::class, 'ret
 
 // ABOUT
 Route::resource('about', AboutController::class);
+Route::get('riwayat-aplikasi', [RiwayatAplikasiController::class, 'index'])->name('riwayat-aplikasi.index');
 
 // MELAKUKAN POLLING SUBMIT
 Route::middleware(['auth'])->post('/websiteapp/pollingsubmit', [PollingController::class, 'submitPolling'])->name('websiteapp.pollingsubmit');
