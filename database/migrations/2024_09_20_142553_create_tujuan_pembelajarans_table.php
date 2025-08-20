@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu_permission', function (Blueprint $table) {
+        Schema::create('tujuan_pembelajarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_id')->constrained('menus');
-            $table->foreignId('permission_id')->constrained('permissions');
+            $table->string('kode_rombel');
+            $table->string('kode_mapel');
+            $table->string('id_personil');
+            $table->string('materi_kode');
+            $table->string('tp_kode');
+            $table->text('tp_isi');
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu_permission');
+        Schema::dropIfExists('tujuan_pembelajarans');
     }
 };

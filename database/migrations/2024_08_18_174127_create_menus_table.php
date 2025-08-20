@@ -22,6 +22,13 @@ return new class extends Migration
             $table->foreignId('main_menu_id')->nullable()->constrained('menus');
             $table->timestamps();
         });
+
+        Schema::create('menu_permission', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('menu_id')->constrained('menus');
+            $table->foreignId('permission_id')->constrained('permissions');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -30,5 +37,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('menus');
+        Schema::dropIfExists('menu_permission');
     }
 };
