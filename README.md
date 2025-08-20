@@ -36,6 +36,8 @@
 
 ## Installation Laravel 12 with Template Velzon in Schools Management
 
+1. Clone project:
+
 ```console
 git clone https://github.com/AbdoelMadjid/webskaone-l12.git
 ```
@@ -44,9 +46,19 @@ git clone https://github.com/AbdoelMadjid/webskaone-l12.git
 cd webskaone-l12
 ```
 
+2. Jalankan installer final:
+
 ```console
 php artisan app:install
 ```
+
+3. Ikuti prompt:
+
+-   **Input DB config.**
+
+-   **Pilih jenis import: struktur saja / data saja / struktur + data.**
+
+-   **Semua langkah berjalan otomatis dengan backup, progress bar, warna-warni info/warning/error, dan ringkasan akhir.**
 
 <p align="center"></p>
 

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class AppInstall extends Command
 {
@@ -26,19 +27,19 @@ class AppInstall extends Command
      */
     public function handle()
     {
-        $this->info("=== Install Webskaone Laravel 12 ===");
+        $this->info("\n=== Final Installer Webskaone Laravel 12 ===\n");
 
         // 1. Cek composer
         exec("composer --version", $output, $composerStatus);
         if ($composerStatus !== 0) {
-            $this->error("Composer tidak ditemukan. Pastikan composer terinstall dan PATH sudah diset.");
+            $this->error("\n[ERROR] Composer tidak ditemukan. Pastikan composer terinstall.\n");
             return;
         }
 
         // 2. Cek mysql
         exec("mysql --version", $output, $mysqlStatus);
         if ($mysqlStatus !== 0) {
-            $this->error("MySQL client tidak ditemukan. Pastikan mysql terinstall dan PATH sudah diset.");
+            $this->error("\n[ERROR] MySQL client tidak ditemukan. Pastikan mysql terinstall.\n");
             return;
         }
 
@@ -48,6 +49,7 @@ class AppInstall extends Command
             'Composer install',
             'Generate application key',
             'Validasi koneksi database',
+            'Backup database (jika ada)',
             'Import database structure',
             'Import database data',
             'Optimize clear'
@@ -56,13 +58,16 @@ class AppInstall extends Command
         $bar = $this->output->createProgressBar(count($steps));
         $bar->start();
 
-        // 1. Copy .env
+        // 3. Copy .env
         if (!file_exists(base_path('.env'))) {
             copy(base_path('.env.example'), base_path('.env'));
+            $this->line("\n[INFO] .env created from .env.example");
+        } else {
+            $this->line("\n[INFO] .env already exists");
         }
         $bar->advance();
 
-        // 2. Ask DB config
+        // 4. Ask DB config
         $dbHost = $this->ask("DB_HOST", "127.0.0.1");
         $dbPort = $this->ask("DB_PORT", "3306");
         $dbName = $this->ask("DB_DATABASE", "webskaone-l12");
@@ -81,19 +86,25 @@ class AppInstall extends Command
         file_put_contents($envPath, $envContent);
         $bar->advance();
 
-        // 3. Composer install
-        $this->info("\nRunning composer install...");
-        exec("composer install");
+        // 5. Composer install
+        $this->line("\n[INFO] Running composer install...");
+        exec("composer install", $composerOutput, $composerStatus);
+        if ($composerStatus === 0) {
+            $this->info("[SUCCESS] Composer install completed");
+        } else {
+            $this->error("[ERROR] Composer install failed");
+            return;
+        }
         $bar->advance();
 
-        // 4. Generate key
+        // 6. Generate key
         $this->call('key:generate');
         $bar->advance();
 
-        // 5. Validasi koneksi database
-        $this->info("\nValidating database connection...");
+        // 7. Validasi koneksi database
+        $this->line("\n[INFO] Validating database connection...");
         try {
-            DB::purge('mysql'); // reset koneksi
+            DB::purge('mysql');
             config([
                 'database.connections.mysql.host' => $dbHost,
                 'database.connections.mysql.port' => $dbPort,
@@ -102,38 +113,69 @@ class AppInstall extends Command
                 'database.connections.mysql.password' => $dbPass,
             ]);
             DB::connection()->getPdo();
-            $this->info("Database connection successful.");
+            $this->info("[SUCCESS] Database connection successful.");
         } catch (\Exception $e) {
-            $this->error("Database connection failed: " . $e->getMessage());
+            $this->error("[ERROR] Database connection failed: " . $e->getMessage());
             return;
         }
         $bar->advance();
 
-        // 6. Import database structure
-        $structureFile = public_path('backup/struktur.sql');
-        if (file_exists($structureFile)) {
-            $this->info("Importing database structure...");
+        // 8. Backup database
+        $backupDir = storage_path('backups');
+        if (!File::exists($backupDir)) {
+            File::makeDirectory($backupDir, 0755, true);
+        }
+        $backupFile = $backupDir . "/backup_" . date('Y-m-d_H-i-s') . ".sql";
+        $this->line("\n[INFO] Backing up existing database...");
+        exec("mysqldump -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} > {$backupFile}");
+        $this->info("[SUCCESS] Backup saved to {$backupFile}");
+        $bar->advance();
+
+        // 9. Pilihan import
+        $importOption = $this->choice(
+            "\nPilih jenis import",
+            ['struktur saja', 'data saja', 'struktur + data'],
+            2
+        );
+
+        // Import structure
+        $structureFile = public_path('backup_db/structure.sql');
+        if (($importOption == 'struktur saja' || $importOption == 'struktur + data') && file_exists($structureFile)) {
+            $this->line("[INFO] Importing database structure...");
             exec("mysql -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} < {$structureFile}");
-        } else {
-            $this->warn("File structure.sql tidak ditemukan di public/backup_db");
+            $this->info("[SUCCESS] Database structure imported.");
+        } elseif (($importOption == 'struktur saja' || $importOption == 'struktur + data')) {
+            $this->warn("[WARNING] File structure.sql tidak ditemukan");
         }
         $bar->advance();
 
-        // 7. Import database data
-        $dataFile = public_path('backup/data.sql');
-        if (file_exists($dataFile)) {
-            $this->info("Importing database data...");
+        // Import data
+        $dataFile = public_path('backup_db/data.sql');
+        if (($importOption == 'data saja' || $importOption == 'struktur + data') && file_exists($dataFile)) {
+            $this->line("[INFO] Importing database data...");
             exec("mysql -u{$dbUser} -p{$dbPass} -h{$dbHost} {$dbName} < {$dataFile}");
-        } else {
-            $this->warn("File data.sql tidak ditemukan di public/backup_db");
+            $this->info("[SUCCESS] Database data imported.");
+        } elseif (($importOption == 'data saja' || $importOption == 'struktur + data')) {
+            $this->warn("[WARNING] File data.sql tidak ditemukan");
         }
         $bar->advance();
 
-        // 8. Optimize clear
+        // 10. Optimize clear
         $this->call('optimize:clear');
         $bar->advance();
 
         $bar->finish();
-        $this->info("\n=== Installation Completed! ===");
+
+        // 11. Notifikasi suara beep
+        echo "\007"; // beep di terminal
+
+        // 12. Ringkasan akhir
+        $this->info("\n\n=== Installation Completed! ===");
+        $this->info("[SUMMARY]");
+        $this->info("Database: {$dbName}");
+        $this->info("Backup file: {$backupFile}");
+        $this->info("Import option: {$importOption}");
+        $this->info("Composer & Key generated, optimize cleared.");
+        $this->info("[SUCCESS] Laravel 12 Webskaone siap digunakan!\n");
     }
 }
