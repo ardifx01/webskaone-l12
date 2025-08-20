@@ -13,8 +13,8 @@
 /.zed
 /auth.json
 /node_modules
-/public/images
-/public/perangkat-ajar
+/images
+/perangkat-ajar
 /public/hot
 /public/storage
 /storage/*.key
