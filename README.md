@@ -23,7 +23,7 @@
 
 <br/>
 <!-- INSTALLATION -->
-## Installation
+## Installer Laravel 12 with template velzon
 
 ```console
 git clone https://github.com/AbdoelMadjid/webskaone-l12.git
