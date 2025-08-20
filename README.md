@@ -22,6 +22,8 @@
 </div>
 
 <p align="center"></p>
+<p align="center"></p>
+<p align="center"></p>
 
 ## Installer Laravel 12 with template velzon
 
