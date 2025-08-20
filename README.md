@@ -21,8 +21,8 @@
 
 </div>
 
-<br/>
-<!-- INSTALLATION -->
+<p align="center"></p>
+
 ## Installer Laravel 12 with template velzon
 
 ```console
