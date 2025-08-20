@@ -19,7 +19,7 @@
                     $imagePath =
                         $photo && $photo->logo
                             ? asset('images/jurusan_logo/' . $photo->logo)
-                            : asset('images/jurusan_logo/default.jpg');
+                            : asset('images/jurusan_logo/default.png');
                 @endphp
                 <img src="{{ $imagePath }}" alt="client-img" class="mx-auto img-fluid d-block">
                 {{-- <img class="img-fluid" src="{{ URL::asset('images/jurusan_logo/logo-ak.png') }}"

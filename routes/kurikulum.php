@@ -121,7 +121,7 @@ Route::middleware('auth')->group(function () {
             Route::get('get-rombel-by-filter', [BerkasCetakController::class, 'getRombelByFilter'])->name('getrombelbyfilter');
 
 
-            Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+            Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('show');
         });
 
         Route::group(['prefix' => 'dokumenguru', 'as' => 'dokumenguru.'], function () {

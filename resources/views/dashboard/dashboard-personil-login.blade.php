@@ -19,7 +19,7 @@
                                             class="d-flex justify-content-between border-bottom border-bottom-dashed py-0">
                                             <p class="fw-medium mb-0">
                                                 @php
-                                                    $avatarPath = public_path('images/personil/' . $user->avatar);
+                                                    $avatarPath = base_path('images/personil/' . $user->avatar);
                                                     $avatarExists = file_exists($avatarPath) && !is_dir($avatarPath);
                                                 @endphp
 
