@@ -24,11 +24,16 @@ class RiwayatAplikasiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('tampil_deskripsi', function ($row) {
+                return $row->deskripsi;
+            })
             ->addColumn('action', function ($row) {
                 $actions = $this->basicActions($row);
+                unset($actions['Detail']);
                 return view('action', compact('actions'));
             })
-            ->addIndexColumn();
+            ->addIndexColumn()
+            ->rawColumns(['tampil_deskripsi', 'action']);
     }
 
     /**
@@ -73,7 +78,7 @@ class RiwayatAplikasiDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false),
             Column::make('judul'),
             Column::make('sub_judul'),
-            Column::make('deskripsi'),
+            Column::make('tampil_deskripsi'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

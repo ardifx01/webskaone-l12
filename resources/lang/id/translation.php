@@ -236,6 +236,7 @@ return [
     //
     "about" => "About",
     "homepage" => "Hompepage",
+    "riwayat-aplikasi" => "Riwayat Aplikasi",
 
     "IDENTITAS PENGGUNA" => "Identitas Pengguna",
     "identitas-pengguna" => "Identitas Pengguna",

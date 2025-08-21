@@ -1,4 +1,4 @@
-<x-form.modal size="xl" title="{{ __('translation.riwayat-aplikasi') }}" action="{{ $action ?? null }}">
+<x-form.modal size="lg" title="{{ __('translation.riwayat-aplikasi') }}" action="{{ $action ?? null }}">
     @if ($data->id)
         @method('put')
     @endif
@@ -14,29 +14,64 @@
     </div>
 </x-form.modal>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        let editorInstance;
+    let editors = {};
 
+    document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener('shown.bs.modal', function(event) {
-            // cari textarea id ckeditor
-            const el = document.querySelector('#ckeditor');
-            if (el && !editorInstance) {
+            const el = event.target.querySelector('[id^="ckeditor-"]');
+            if (el && !el.classList.contains('ck-editor-applied')) {
                 ClassicEditor
                     .create(el, {
                         toolbar: [
                             'heading', '|',
-                            'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                            'bold', 'italic', 'underline', '|',
+                            'link', 'bulletedList', 'numberedList', '|',
                             'code', 'codeBlock', '|',
                             'undo', 'redo'
-                        ]
+                        ],
+                        codeBlock: {
+                            languages: [{
+                                    language: 'plaintext',
+                                    label: 'Plain text'
+                                },
+                                {
+                                    language: 'javascript',
+                                    label: 'JavaScript'
+                                },
+                                {
+                                    language: 'php',
+                                    label: 'PHP'
+                                },
+                                {
+                                    language: 'html',
+                                    label: 'HTML'
+                                },
+                                {
+                                    language: 'css',
+                                    label: 'CSS'
+                                }
+                            ]
+                        }
                     })
                     .then(editor => {
-                        editorInstance = editor;
+                        editors[el.id] = editor; // simpan editor instance
+                        el.classList.add('ck-editor-applied');
                     })
                     .catch(error => {
                         console.error(error);
                     });
             }
+        });
+
+        // sebelum submit form, update value textarea
+        document.addEventListener("submit", function(e) {
+            Object.keys(editors).forEach(id => {
+                const editor = editors[id];
+                const textarea = document.getElementById(id);
+                if (editor && textarea) {
+                    textarea.value = editor.getData();
+                }
+            });
         });
 
         hljs.highlightAll();
