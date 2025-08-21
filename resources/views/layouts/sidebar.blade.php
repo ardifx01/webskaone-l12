@@ -139,7 +139,8 @@
                 <li class="nav-item mt-3 mb-1" style="border-top: 1px dashed #4379d866; margin:25px 25px 0px 25px;">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Request::is('about*') ? 'active' : '' }}" href="/about">
+                    <a class="nav-link menu-link {{ Request::is('about*') ? 'active' : '' }}"
+                        href="{{ route('about.index') }}">
                         <i class="ri-question-line"></i> <span>@lang('translation.about')</span>
                     </a>
                 </li>
