@@ -19,7 +19,7 @@
                                 </a>
                             </div>
                             <p class="mt-3 fs-15 fw-medium">{{ $profileApp->app_deskripsi ?? '' }}</p>
-                            <x-btn-action href="{{ route('about.riwayat-aplikasi.index') }}" label="riwayat aplikasi" />
+                            <x-btn-action href="{{ route('about.riwayat-aplikasi.index') }}" label="Riwayat Aplikasi" />
                         </div>
                     </div>
                     <div class="shape">

@@ -22,7 +22,10 @@ class RiwayatAplikasiController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.about.riwayat-aplikasi-form', [
+            'data' => new RiwayatAplikasi(),
+            'action' => route('about.riwayat-aplikasi.store')
+        ]);
     }
 
     /**

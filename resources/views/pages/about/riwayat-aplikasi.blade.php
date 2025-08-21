@@ -3,7 +3,7 @@
     Riwayat Aplikasi
 @endsection
 @section('css')
-    <link href="{{ URL::asset('build/libs/multi.js/multi.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 @endsection
 @section('content')
     @component('layouts.breadcrumb')
@@ -16,6 +16,8 @@
             <div class="d-flex align-items-center">
                 <x-heading-title>@yield('title')</x-heading-title>
                 <div class="flex-shrink-0">
+                    <x-btn-tambah dinamisBtn="true" can="create about/riwayat-aplikasi" route="about.riwayat-aplikasi.create"
+                        label="Tambah" icon="ri-add-line" />
                 </div>
             </div>
         </div>
@@ -25,6 +27,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     {!! $dataTable->scripts() !!}
 @endsection
 @section('script-bottom')
