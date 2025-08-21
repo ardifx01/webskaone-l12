@@ -105,9 +105,6 @@ Route::middleware(['auth'])->get('/return-account', [UserController::class, 'ret
 /* Route::resource('about', AboutController::class);
 Route::get('riwayat-aplikasi', [RiwayatAplikasiController::class, 'index'])->name('riwayat-aplikasi.index'); */
 Route::get('about', [AboutController::class, 'index'])->name('about.index');
-Route::prefix('about')->as('about.')->group(function () {
-    Route::resource('riwayat-aplikasi', RiwayatAplikasiController::class);
-});
 
 // MELAKUKAN POLLING SUBMIT
 Route::middleware(['auth'])->post('/websiteapp/pollingsubmit', [PollingController::class, 'submitPolling'])->name('websiteapp.pollingsubmit');

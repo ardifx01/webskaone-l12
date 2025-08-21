@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\About;
+namespace App\Http\Controllers\WebSite;
 
-use App\DataTables\About\RiwayatAplikasiDataTable;
+use App\DataTables\WebSite\RiwayatAplikasiDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\About\RiwayatAplikasiRequest;
-use App\Models\About\RiwayatAplikasi;
+use App\Http\Requests\WebSite\RiwayatAplikasiRequest;
+use App\Models\WebSite\RiwayatAplikasi;
 use Illuminate\Http\Request;
 
 class RiwayatAplikasiController extends Controller
@@ -15,7 +15,7 @@ class RiwayatAplikasiController extends Controller
      */
     public function index(RiwayatAplikasiDataTable $riwayatAplikasiDataTable)
     {
-        return $riwayatAplikasiDataTable->render('pages.about.riwayat-aplikasi');
+        return $riwayatAplikasiDataTable->render('pages.website.riwayat-aplikasi');
     }
 
     /**
@@ -23,9 +23,9 @@ class RiwayatAplikasiController extends Controller
      */
     public function create()
     {
-        return view('pages.about.riwayat-aplikasi-form', [
+        return view('pages.website.riwayat-aplikasi-form', [
             'data' => new RiwayatAplikasi(),
-            'action' => route('about.riwayat-aplikasi.store')
+            'action' => route('websiteapp.riwayat-aplikasi.store')
         ]);
     }
 
@@ -53,9 +53,9 @@ class RiwayatAplikasiController extends Controller
      */
     public function edit(RiwayatAplikasi $riwayat_aplikasi)
     {
-        return view('pages.about.riwayat-aplikasi-form', [
+        return view('pages.website.riwayat-aplikasi-form', [
             'data' => $riwayat_aplikasi,
-            'action' => route('about.riwayat-aplikasi.update', $riwayat_aplikasi->id)
+            'action' => route('websiteapp.riwayat-aplikasi.update', $riwayat_aplikasi->id)
         ]);
     }
 

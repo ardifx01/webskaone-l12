@@ -17,6 +17,10 @@
 {{-- <script src="{{ URL::asset('build/libs/select2/js/select2.min.js') }}"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+{{-- ckeditor --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
 @yield('script')
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 @yield('script-bottom')

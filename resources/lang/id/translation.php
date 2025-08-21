@@ -277,8 +277,9 @@ return [
 
     //web site app
     'web-site-app' => 'Web Site App',
+    'upload-photo' => 'Upload Photo/Gambar',
     "team-pengembang" => "Tim Pengembang",
-    'kumpulan-faqs' => 'Frequently Asked Questions',
+    'kumpulan-faqs' => 'FAQ',
     "fitur-coding" => "Fitur Coding",
     "photo-slide" => "Slide Foto",
     "galery" => "Galery",

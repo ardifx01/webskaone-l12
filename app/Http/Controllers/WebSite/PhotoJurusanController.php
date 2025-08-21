@@ -17,7 +17,7 @@ class PhotoJurusanController extends Controller
      */
     public function index(PhotoJurusanDataTable $photoJurusanDataTable)
     {
-        return $photoJurusanDataTable->render('pages.website.photo-jurusan');
+        return $photoJurusanDataTable->render('pages.website.uploadphoto.photo-jurusan');
     }
 
     /**
@@ -26,10 +26,10 @@ class PhotoJurusanController extends Controller
     public function create()
     {
         $kompetensiKeahlian = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
-        return view('pages.website.photo-jurusan-form', [
+        return view('pages.website.uploadphoto.photo-jurusan-form', [
             'data' => new PhotoJurusan(),
             'kompetensiKeahlian' => $kompetensiKeahlian,
-            'action' => route('websiteapp.photo-jurusan.store')
+            'action' => route('websiteapp.uploadphoto.photo-jurusan.store')
         ]);
     }
 
@@ -67,7 +67,7 @@ class PhotoJurusanController extends Controller
     public function show(PhotoJurusan $photoJurusan)
     {
         $kompetensiKeahlian = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
-        return view('pages.website.photo-jurusan-form', [
+        return view('pages.website.uploadphoto.photo-jurusan-form', [
             'data' => $photoJurusan,
             'kompetensiKeahlian' => $kompetensiKeahlian,
         ]);
@@ -79,10 +79,10 @@ class PhotoJurusanController extends Controller
     public function edit(PhotoJurusan $photoJurusan)
     {
         $kompetensiKeahlian = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
-        return view('pages.website.photo-jurusan-form', [
+        return view('pages.website.uploadphoto.photo-jurusan-form', [
             'data' => $photoJurusan,
             'kompetensiKeahlian' => $kompetensiKeahlian,
-            'action' => route('websiteapp.photo-jurusan.update', $photoJurusan->id)
+            'action' => route('websiteapp.uploadphoto.photo-jurusan.update', $photoJurusan->id)
         ]);
     }
 

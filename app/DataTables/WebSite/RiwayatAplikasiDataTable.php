@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables\About;
+namespace App\DataTables\WebSite;
 
-use App\Models\About\RiwayatAplikasi;
+use App\Models\WebSite\RiwayatAplikasi;
 use App\Traits\DatatableHelper;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;

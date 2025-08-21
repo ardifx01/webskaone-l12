@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Alumni\RiwayatKerjaController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\WebSite\DailyMessagesController;
 use App\Http\Controllers\WebSite\FiturCodingController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\WebSite\PhotoSlideController;
 use App\Http\Controllers\WebSite\PollingController;
 use App\Http\Controllers\WebSite\ProfilLulusanProspekController;
 use App\Http\Controllers\WebSite\QuestionController;
+use App\Http\Controllers\WebSite\RiwayatAplikasiController;
 use App\Http\Controllers\WebSite\TeamPengembangController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,19 +30,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'websiteapp', 'as' => 'websiteapp.'], function () {
-        Route::resource('kumpulan-faqs', KumpulanFaqController::class);
+        Route::group(['prefix' => 'uploadphoto', 'as' => 'uploadphoto.'], function () {
+            Route::resource('photo-slides', PhotoSlideController::class);
+            Route::resource('galery', GaleryController::class);
+            Route::resource('photo-jurusan', PhotoJurusanController::class);
+            Route::resource('logo-jurusan', LogoJurusanController::class);
+            Route::resource('photo-personil', PhotoPersonilController::class);
+        });
+        Route::resource('profil-jurusan', ProfilLulusanProspekController::class);
         Route::resource('team-pengembang', TeamPengembangController::class);
-        Route::resource('fitur-coding', FiturCodingController::class);
-        Route::resource('photo-slides', PhotoSlideController::class);
-        Route::resource('galery', GaleryController::class);
-        Route::resource('photo-jurusan', PhotoJurusanController::class);
+        Route::resource('kumpulan-faqs', KumpulanFaqController::class);
         Route::resource('daily-messages', DailyMessagesController::class);
-        Route::get('events/list', [EventController::class, 'listEvent'])->name('events.list');
+
         Route::resource('events', EventController::class);
+        Route::get('events/list', [EventController::class, 'listEvent'])->name('events.list');
+
         Route::resource('polling', PollingController::class);
         Route::resource('question', QuestionController::class);
-        Route::resource('photo-personil', PhotoPersonilController::class);
-        Route::resource('profil-jurusan', ProfilLulusanProspekController::class);
-        Route::resource('logo-jurusan', LogoJurusanController::class);
+
+        Route::resource('fitur-coding', FiturCodingController::class);
+        Route::resource('riwayat-aplikasi', RiwayatAplikasiController::class);
     });
 });

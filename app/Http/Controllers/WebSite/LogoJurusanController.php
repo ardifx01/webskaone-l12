@@ -18,7 +18,7 @@ class LogoJurusanController extends Controller
      */
     public function index(LogoJurusanDataTable $logoJurusanDataTable)
     {
-        return $logoJurusanDataTable->render('pages.website.logo-jurusan');
+        return $logoJurusanDataTable->render('pages.website.uploadphoto.logo-jurusan');
     }
 
     /**
@@ -27,10 +27,10 @@ class LogoJurusanController extends Controller
     public function create()
     {
         $kompetensiKeahlian = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
-        return view('pages.website.logo-jurusan-form', [
+        return view('pages.website.uploadphoto.logo-jurusan-form', [
             'data' => new LogoJurusan(),
             'kompetensiKeahlian' => $kompetensiKeahlian,
-            'action' => route('websiteapp.logo-jurusan.store')
+            'action' => route('websiteapp.uploadphoto.logo-jurusan.store')
         ]);
     }
 
@@ -68,7 +68,7 @@ class LogoJurusanController extends Controller
     public function show(LogoJurusan $logo_jurusan)
     {
         $kompetensiKeahlian = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
-        return view('pages.website.logo-jurusan-form', [
+        return view('pages.website.uploadphoto.logo-jurusan-form', [
             'data' => $logo_jurusan,
             'kompetensiKeahlian' => $kompetensiKeahlian,
         ]);
@@ -80,10 +80,10 @@ class LogoJurusanController extends Controller
     public function edit(LogoJurusan $logo_jurusan)
     {
         $kompetensiKeahlian = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
-        return view('pages.website.logo-jurusan-form', [
+        return view('pages.website.uploadphoto.logo-jurusan-form', [
             'data' => $logo_jurusan,
             'kompetensiKeahlian' => $kompetensiKeahlian,
-            'action' => route('websiteapp.logo-jurusan.update', $logo_jurusan->id)
+            'action' => route('websiteapp.uploadphoto.logo-jurusan.update', $logo_jurusan->id)
         ]);
     }
 

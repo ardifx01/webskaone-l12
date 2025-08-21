@@ -18,7 +18,7 @@ class PhotoPersonilController extends Controller
      */
     public function index(PhotoPersonilDataTable $photoPersonilDataTable)
     {
-        return $photoPersonilDataTable->render('pages.website.photo-personil');
+        return $photoPersonilDataTable->render('pages.website.uploadphoto.photo-personil');
     }
 
     /**
@@ -33,12 +33,12 @@ class PhotoPersonilController extends Controller
 
         $groupnameOption = Referensi::where('jenis', 'GroupPersonil')->pluck('data', 'data')->toArray();
         $personilSekolah = PersonilSekolah::where('aktif', 'Aktif')->orderBy('namalengkap', 'asc')->pluck('namalengkap', 'id_personil')->toArray();
-        return view('pages.website.photo-personil-form', [
+        return view('pages.website.uploadphoto.photo-personil-form', [
             'data' => new PhotoPersonil(),
             'groupnameOption' => $groupnameOption,
             'personilSekolah' => $personilSekolah,
             'nomorOptions' => $nomorOptions,
-            'action' => route('websiteapp.photo-personil.store')
+            'action' => route('websiteapp.uploadphoto.photo-personil.store')
         ]);
     }
 
@@ -73,9 +73,21 @@ class PhotoPersonilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(PhotoPersonil $photo_personil)
     {
-        //
+        $nomorOptions = [];
+        for ($i = 1; $i <= 25; $i++) {
+            $nomorOptions[$i] = (string) $i;
+        }
+
+        $groupnameOption = Referensi::where('jenis', 'GroupPersonil')->pluck('data', 'data')->toArray();
+        $personilSekolah = PersonilSekolah::where('aktif', 'Aktif')->orderBy('namalengkap', 'asc')->pluck('namalengkap', 'id_personil')->toArray();
+        return view('pages.website.uploadphoto.photo-personil-form', [
+            'data' => $photo_personil,
+            'groupnameOption' => $groupnameOption,
+            'personilSekolah' => $personilSekolah,
+            'nomorOptions' => $nomorOptions,
+        ]);
     }
 
     /**
@@ -90,12 +102,12 @@ class PhotoPersonilController extends Controller
 
         $groupnameOption = Referensi::where('jenis', 'GroupPersonil')->pluck('data', 'data')->toArray();
         $personilSekolah = PersonilSekolah::where('aktif', 'Aktif')->orderBy('namalengkap', 'asc')->pluck('namalengkap', 'id_personil')->toArray();
-        return view('pages.website.photo-personil-form', [
+        return view('pages.website.uploadphoto.photo-personil-form', [
             'data' => $photo_personil,
             'groupnameOption' => $groupnameOption,
             'personilSekolah' => $personilSekolah,
             'nomorOptions' => $nomorOptions,
-            'action' => route('websiteapp.photo-personil.update', $photo_personil->id)
+            'action' => route('websiteapp.uploadphoto.photo-personil.update', $photo_personil->id)
         ]);
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    @lang('translation.galery')
+    @lang('translation.photo-personil')
 @endsection
 @section('css')
     {{--  --}}
@@ -16,7 +16,8 @@
             <div class="d-flex align-items-center">
                 <x-heading-title>@yield('title')</x-heading-title>
                 <div class="flex-shrink-0">
-                    <x-btn-tambah dinamisBtn="true" can="create websiteapp/galery" route="websiteapp.galery.create" />
+                    <x-btn-tambah dinamisBtn="true" can="create websiteapp/uploadphoto/photo-personil"
+                        route="websiteapp.uploadphoto.photo-personil.create" />
                 </div>
             </div>
         </div>
@@ -30,7 +31,7 @@
 @endsection
 @section('script-bottom')
     <script>
-        const datatable = 'galery-table';
+        const datatable = 'photopersonil-table';
 
         handleDataTableEvents(datatable);
         handleAction(datatable)

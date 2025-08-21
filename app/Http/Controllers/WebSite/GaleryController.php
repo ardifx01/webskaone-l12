@@ -19,7 +19,7 @@ class GaleryController extends Controller
      */
     public function index(GaleryDataTable $galeryDataTable)
     {
-        return $galeryDataTable->render('pages.website.galery');
+        return $galeryDataTable->render('pages.website.uploadphoto.galery');
     }
 
     /**
@@ -29,11 +29,11 @@ class GaleryController extends Controller
     {
         $categoryGalery = Referensi::where('jenis', 'KategoriGalery')->pluck('data', 'data')->toArray();
         $personilSekolah = PersonilSekolah::pluck('namalengkap', 'namalengkap')->toArray();
-        return view('pages.website.galery-form', [
+        return view('pages.website.uploadphoto.galery-form', [
             'data' => new Galery(),
             'categoryGalery' => $categoryGalery,
             'personilSekolah' => $personilSekolah,
-            'action' => route('websiteapp.galery.store')
+            'action' => route('websiteapp.uploadphoto.galery.store')
         ]);
     }
 
@@ -78,7 +78,7 @@ class GaleryController extends Controller
     {
         $categoryGalery = Referensi::where('jenis', 'KategoriGalery')->pluck('data', 'data')->toArray();
         $personilSekolah = PersonilSekolah::pluck('namalengkap', 'namalengkap')->toArray();
-        return view('pages.website.galery-form', [
+        return view('pages.website.uploadphoto.galery-form', [
             'data' => $galery,
             'categoryGalery' => $categoryGalery,
             'personilSekolah' => $personilSekolah,
@@ -92,11 +92,11 @@ class GaleryController extends Controller
     {
         $categoryGalery = Referensi::where('jenis', 'KategoriGalery')->pluck('data', 'data')->toArray();
         $personilSekolah = PersonilSekolah::pluck('namalengkap', 'namalengkap')->toArray();
-        return view('pages.website.galery-form', [
+        return view('pages.website.uploadphoto.galery-form', [
             'data' => $galery,
             'categoryGalery' => $categoryGalery,
             'personilSekolah' => $personilSekolah,
-            'action' => route('websiteapp.galery.update', $galery->id)
+            'action' => route('websiteapp.uploadphoto.galery.update', $galery->id)
         ]);
     }
 

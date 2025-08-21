@@ -24,11 +24,15 @@ class KumpulanFaqDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('tampil_jawaban', function ($row) {
+                return $row->jawaban;
+            })
             ->addColumn('action', function ($row) {
                 $actions = $this->basicActions($row);
                 return view('action', compact('actions'));
             })
-            ->addIndexColumn();
+            ->addIndexColumn()
+            ->rawColumns(['tampil_jawaban', 'action']);
     }
 
     /**
@@ -71,7 +75,7 @@ class KumpulanFaqDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center')->width(50),
             Column::make('kategori'),
             Column::make('pertanyaan'),
-            Column::make('jawaban'),
+            Column::make('tampil_jawaban'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

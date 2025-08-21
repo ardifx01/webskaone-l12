@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    @lang('translation.photo-jurusan')
+    @lang('translation.galery')
 @endsection
 @section('css')
     {{--  --}}
@@ -16,8 +16,8 @@
             <div class="d-flex align-items-center">
                 <x-heading-title>@yield('title')</x-heading-title>
                 <div class="flex-shrink-0">
-                    <x-btn-tambah dinamisBtn="true" can="create websiteapp/photo-jurusan"
-                        route="websiteapp.photo-jurusan.create" />
+                    <x-btn-tambah dinamisBtn="true" can="create websiteapp/uploadphoto/galery"
+                        route="websiteapp.uploadphoto.galery.create" />
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
 @endsection
 @section('script-bottom')
     <script>
-        const datatable = 'photojurusan-table';
+        const datatable = 'galery-table';
 
         handleDataTableEvents(datatable);
         handleAction(datatable)

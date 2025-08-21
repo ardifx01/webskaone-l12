@@ -21,6 +21,8 @@
 <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
     rel="stylesheet" />
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+
 <!-- custom-->
 <link href="{{ URL::asset('build/css/loading.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('build/css/garis_datatable.css') }}" rel="stylesheet" />

@@ -17,7 +17,7 @@ class PhotoSlideController extends Controller
      */
     public function index(PhotoSlideDataTable $photoSlideDataTable)
     {
-        return $photoSlideDataTable->render('pages.website.photo-slide');
+        return $photoSlideDataTable->render('pages.website.uploadphoto.photo-slide');
     }
 
     /**
@@ -25,9 +25,9 @@ class PhotoSlideController extends Controller
      */
     public function create()
     {
-        return view('pages.website.photo-slide-form', [
+        return view('pages.website.uploadphoto.photo-slide-form', [
             'data' => new PhotoSlide(),
-            'action' => route('websiteapp.photo-slides.store')
+            'action' => route('websiteapp.uploadphoto.photo-slides.store')
         ]);
     }
 
@@ -64,7 +64,7 @@ class PhotoSlideController extends Controller
      */
     public function show(PhotoSlide $photoSlide)
     {
-        return view('pages.website.photo-slide-form', [
+        return view('pages.website.uploadphoto.photo-slide-form', [
             'data' => $photoSlide,
         ]);
     }
@@ -74,9 +74,9 @@ class PhotoSlideController extends Controller
      */
     public function edit(PhotoSlide $photoSlide)
     {
-        return view('pages.website.photo-slide-form', [
+        return view('pages.website.uploadphoto.photo-slide-form', [
             'data' => $photoSlide,
-            'action' => route('websiteapp.photo-slides.update', $photoSlide->id)
+            'action' => route('websiteapp.uploadphoto.photo-slides.update', $photoSlide->id)
         ]);
     }
 
