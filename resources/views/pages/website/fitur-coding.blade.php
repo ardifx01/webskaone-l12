@@ -36,6 +36,7 @@
         handleDataTableEvents(datatable);
         handleAction(datatable)
         handleDelete(datatable)
+        initCkEditor(document.getElementById("modal_action"));
     </script>
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
 @endsection

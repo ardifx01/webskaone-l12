@@ -20,6 +20,7 @@
 {{-- ckeditor --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="{{ URL::asset('build/js/initCkEditor.js') }}"></script>
 
 @yield('script')
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
