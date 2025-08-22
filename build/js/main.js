@@ -219,7 +219,7 @@ function handleAjax(url, method = 'get'){
     }
 }
 
-function handleDataTableEvents(tableId, emptyMessage = 'Silakan untuk ditambahkan terlebih dahulu.') {
+/* function handleDataTableEvents(tableId, emptyMessage = 'Silakan untuk ditambahkan terlebih dahulu.') {
     $.fn.dataTable.ext.errMode = 'none'; // Disable default error alert
 
     $('#' + tableId).on('error.dt', function(e, settings, techNote, message) {
@@ -247,7 +247,50 @@ function handleDataTableEvents(tableId, emptyMessage = 'Silakan untuk ditambahka
         }
     });
 }
+ */
+function handleDataTableEvents(tableId, emptyMessage = 'Silakan untuk ditambahkan terlebih dahulu.', notFoundMessage = 'Data tidak ditemukan sesuai pencarian.') {
+    $.fn.dataTable.ext.errMode = 'none'; // Disable default error alert
 
+    // Penanganan error field tidak sesuai
+    $('#' + tableId).on('error.dt', function(e, settings, techNote, message) {
+        console.log('An error has been reported by DataTables: ', message);
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Terjadi kesalahan dalam memuat data.',
+            footer: '<div class="text-info fs-6"><a href="https://github.com/AbdoelMadjid" target="_blank">Scripting & Design by. Abdul Madjid, S.Pd., M.Pd.</a></div>'
+        });
+    });
+
+    // Penanganan kondisi kosong
+    $('#' + tableId).on('draw.dt', function() {
+        const table = $('#' + tableId).DataTable();
+        const info = table.page.info();
+
+        if (info.recordsTotal === 0) {
+            // Kasus 1: data memang kosong dari awal
+            Swal.fire({
+                icon: 'info',
+                title: 'Data ' + document.querySelector('meta[name="page-title"]').content +
+                    ' <br><h2 class="mt-4 text-danger">Masih Kosong</h2>',
+                text: emptyMessage,
+                footer: '<div class="text-info fs-6"><a href="https://github.com/AbdoelMadjid" target="_blank">Scripting & Design by. Abdul Madjid, S.Pd., M.Pd.</a></div>'
+            });
+        }
+        else if (info.recordsTotal > 0 && info.recordsDisplay === 0) {
+            // Kasus 2: data ada, tapi filter bikin kosong
+            const keyword = $(".search").val(); // ambil keyword pencarian manual
+            Swal.fire({
+                icon: 'warning',
+                title: 'Pencarian Data',
+                text: `Hasil pencarian ${keyword} tidak ditemukan.`,
+                footer: '<div class="text-info fs-6"><a href="https://github.com/AbdoelMadjid" target="_blank">Scripting & Design by. Abdul Madjid, S.Pd., M.Pd.</a></div>'
+            });
+        }
+    });
+
+}
 
 /* // Fungsi untuk memeriksa session dan menampilkan notifikasi
 function checkSessionAndShowToast() {

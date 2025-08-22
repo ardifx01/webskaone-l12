@@ -27,6 +27,30 @@ class PesertaDidikDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($query) {
+                // pencarian nama
+                if (request()->filled('search')) {
+                    $query->where('peserta_didiks.nama_lengkap', 'like', '%' . request('search') . '%');
+                }
+
+                // filter kompetensi keahlian
+                if (request()->filled('kodeKK') && request('kodeKK') !== 'all') {
+                    $query->where('peserta_didiks.kode_kk', request('kodeKK'));
+                }
+
+                // filter jenis kelamin
+                if (request()->filled('jenkelSiswa') && request('jenkelSiswa') !== 'all') {
+                    $query->where('peserta_didiks.jenis_kelamin', request('jenkelSiswa'));
+                }
+
+                // filter status siswa
+                if (request()->filled('statusSiswa') && request('statusSiswa') !== 'all') {
+                    $query->where('peserta_didiks.status', request('statusSiswa'));
+                } else {
+                    // default: hanya ambil siswa Aktif
+                    $query->where('peserta_didiks.status', 'Aktif');
+                }
+            })
             ->addColumn('checkbox', function ($row) {
                 return '<input class="form-check-input chk-child" type="checkbox"
                             name="chk_child"
@@ -111,36 +135,14 @@ class PesertaDidikDataTable extends DataTable
      */
     public function query(PesertaDidik $model): QueryBuilder
     {
-        $query = $model->newQuery();
-
-        if (request()->has('search') && !empty(request('search'))) {
-            $query->where('nama_lengkap', 'like', '%' . request('search') . '%');
-        }
-
-        if (request()->has('kodeKK') && request('kodeKK') != 'all') {
-            $query->where('kode_kk', request('kodeKK'));
-        }
-
-        if (request()->has('jenkelSiswa') && request('jenkelSiswa') != 'all') {
-            $query->where('jenis_kelamin', request('jenkelSiswa'));
-        }
-
-        if (request()->has('statusSiswa') && request('statusSiswa') != 'all') {
-            $query->where('status', request('statusSiswa'));
-        } else {
-            // Default: hanya ambil siswa Aktif
-            $query->where('status', 'Aktif');
-        }
-
-        $query->select([
-            'peserta_didiks.*',
-            DB::raw('CONCAT(peserta_didiks.kode_kk, " - ", kompetensi_keahlians.singkatan) as kode_kk_singkatan_kk'),
-        ])
+        return $model->newQuery()
             ->join('kompetensi_keahlians', 'peserta_didiks.kode_kk', '=', 'kompetensi_keahlians.idkk')
+            ->select([
+                'peserta_didiks.*',
+                DB::raw('CONCAT(peserta_didiks.kode_kk, " - ", kompetensi_keahlians.singkatan) as kode_kk_singkatan_kk'),
+            ])
             ->orderBy('peserta_didiks.kode_kk', 'asc')
             ->orderBy('peserta_didiks.nis', 'asc');
-
-        return $query;
     }
 
     /**

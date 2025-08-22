@@ -25,6 +25,19 @@ class PersonilSekolahDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($query) {
+                if (request()->filled('search')) {
+                    $query->where('personil_sekolahs.namalengkap', 'like', '%' . request('search') . '%');
+                }
+
+                if (request()->filled('jenisPersonil') && request('jenisPersonil') !== 'all') {
+                    $query->where('personil_sekolahs.jenispersonil', request('jenisPersonil'));
+                }
+
+                if (request()->filled('statusPersonil') && request('statusPersonil') !== 'all') {
+                    $query->where('personil_sekolahs.aktif', request('statusPersonil'));
+                }
+            })
             ->addColumn('checkbox', function ($row) {
                 return '<input class="form-check-input chk-child" type="checkbox"
                         name="chk_child"
@@ -76,38 +89,13 @@ class PersonilSekolahDataTable extends DataTable
      */
     public function query(PersonilSekolah $model): QueryBuilder
     {
-        $query = $model->newQuery()
+        return $model->newQuery()
             ->select('personil_sekolahs.*', 'users.login_count')
             ->leftJoin('users', 'personil_sekolahs.id_personil', '=', 'users.personal_id')
-
-            // 1. Yang ada NIP dulu
             ->orderByRaw("CASE WHEN personil_sekolahs.nip IS NULL OR personil_sekolahs.nip = '' THEN 1 ELSE 0 END ASC")
-
-            // 2. Kepala Sekolah dulu
             ->orderByRaw("FIELD(personil_sekolahs.jenispersonil, 'Kepala Sekolah') DESC")
-
-            // 3. Lalu berdasarkan jenis personil (abjad)
             ->orderBy('personil_sekolahs.jenispersonil', 'asc')
-
-            // 4. Terakhir berdasarkan NIP
             ->orderBy('personil_sekolahs.nip', 'asc');
-
-        // Filter pencarian nama lengkap
-        if (request()->has('search') && request('search')) {
-            $query->where('personil_sekolahs.namalengkap', 'like', '%' . request('search') . '%');
-        }
-
-        // Filter jenis personil
-        if (request()->has('jenisPersonil') && request('jenisPersonil') != 'all') {
-            $query->where('personil_sekolahs.jenispersonil', request('jenisPersonil'));
-        }
-
-        // Filter status personil
-        if (request()->has('statusPersonil') && request('statusPersonil') != 'all') {
-            $query->where('personil_sekolahs.aktif', request('statusPersonil'));
-        }
-
-        return $query;
     }
 
     /**

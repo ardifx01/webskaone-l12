@@ -27,6 +27,39 @@ class RombonganBelajarDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($query) {
+                // filter pencarian manual nama wali kelas
+                if (request()->filled('search')) {
+                    $query->where('personil_sekolahs.namalengkap', 'like', '%' . request('search') . '%');
+                }
+
+                // filter tahun ajaran (default: aktif)
+                if (request()->filled('thAjar') && request('thAjar') !== 'all') {
+                    $query->where('rombongan_belajars.tahunajaran', request('thAjar'));
+                } else {
+                    $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')->first();
+                    if ($tahunAjaranAktif) {
+                        $query->where('rombongan_belajars.tahunajaran', $tahunAjaranAktif->tahunajaran);
+                    }
+                }
+
+                // filter kompetensi keahlian
+                if (request()->filled('kodeKK') && request('kodeKK') !== 'all') {
+                    $query->where('rombongan_belajars.id_kk', request('kodeKK'));
+                }
+
+                // filter tingkat/level kelas
+                if (request()->filled('levelKls') && request('levelKls') !== 'all') {
+                    $query->where('rombongan_belajars.tingkat', request('levelKls'));
+                }
+
+                // custom ordering (jika ada)
+                if (request()->has('order')) {
+                    $orderColumn = request('columns')[request('order')[0]['column']]['data'];
+                    $orderDir = request('order')[0]['dir'];
+                    $query->orderBy($orderColumn, $orderDir);
+                }
+            })
             ->addColumn('nama_walikelas', function ($row) {
                 return $row->namalengkap; // Mengambil nama siswa dari hasil join
             })
@@ -46,59 +79,15 @@ class RombonganBelajarDataTable extends DataTable
      */
     public function query(RombonganBelajar $model): QueryBuilder
     {
-        $query = $model->newQuery();
-
-        // Ambil tahun ajaran dan semester aktif
-        $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')->first();
-        $semesterAktif = null;
-
-        if ($tahunAjaranAktif) {
-            $semesterAktif = Semester::where('status', 'Aktif')
-                ->where('tahun_ajaran_id', $tahunAjaranAktif->id)
-                ->first();
-        }
-
-        // Ambil parameter filter dari request
-        if (request()->has('search') && !empty(request('search'))) {
-            $query->where('personil_sekolahs.namalengkap', 'like', '%' . request('search') . '%');
-        }
-
-        // Filter tahun ajaran
-        if (request()->has('thAjar') && request('thAjar') != 'all') {
-            $query->where('tahunajaran', request('thAjar'));
-        } elseif ($tahunAjaranAktif) {
-            // Default: pakai tahun ajaran aktif
-            $query->where('tahunajaran', $tahunAjaranAktif->tahunajaran);
-        }
-
-        /*         if (request()->has('thAjar') && request('thAjar') != 'all') {
-            $query->where('tahunajaran', request('thAjar'));
-        } */
-
-        if (request()->has('kodeKK') && request('kodeKK') != 'all') {
-            $query->where('rombongan_belajars.id_kk', request('kodeKK'));
-        }
-
-        if (request()->has('levelKls') && request('levelKls') != 'all') {
-            $query->where('rombongan_belajars.tingkat', request('levelKls'));
-        }
-
-        // Handle ordering
-        if (request()->has('order')) {
-            $orderColumn = request('columns')[request('order')[0]['column']]['data']; // Ambil kolom yang diurutkan
-            $orderDir = request('order')[0]['dir']; // Dapatkan arah pengurutan (asc atau desc)
-
-            $query->orderBy($orderColumn, $orderDir);
-        } else {
-            // Default ordering
-            $query->orderBy('id', 'asc');
-        }
-
-        $query->join('personil_sekolahs', 'rombongan_belajars.wali_kelas', '=', 'personil_sekolahs.id_personil')
+        return $model->newQuery()
+            ->join('personil_sekolahs', 'rombongan_belajars.wali_kelas', '=', 'personil_sekolahs.id_personil')
             ->join('kompetensi_keahlians', 'rombongan_belajars.id_kk', '=', 'kompetensi_keahlians.idkk')
-            ->select('rombongan_belajars.*', 'personil_sekolahs.namalengkap', 'kompetensi_keahlians.nama_kk');
-
-        return $query;
+            ->select(
+                'rombongan_belajars.*',
+                'personil_sekolahs.namalengkap',
+                'kompetensi_keahlians.nama_kk'
+            )
+            ->orderBy('rombongan_belajars.id', 'asc');
     }
 
     /**
