@@ -14,8 +14,9 @@ class FiturCodingController extends Controller
      */
     public function index(FiturCodingDataTable $fiturCodingDataTable)
     {
+        $fiturCodings = FiturCoding::all();
         // Handle the fitur coding section
-        return $fiturCodingDataTable->render('pages.website.fitur-coding');
+        return $fiturCodingDataTable->render('pages.website.fitur-coding', compact('fiturCodings'));
     }
 
     /**

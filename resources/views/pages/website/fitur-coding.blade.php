@@ -3,7 +3,7 @@
     @lang('translation.fitur-coding')
 @endsection
 @section('css')
-    {{--  --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
 @endsection
 @section('content')
     @component('layouts.breadcrumb')
@@ -27,6 +27,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
     {!! $dataTable->scripts() !!}
 @endsection
 @section('script-bottom')
