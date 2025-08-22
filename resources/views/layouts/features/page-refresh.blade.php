@@ -15,6 +15,9 @@
         <i id="refreshIcon" class="ri-refresh-line fs-22"></i>
     </button>
 </div>
+<div class="ms-1 header-item d-none d-sm-flex">
+    <x-btn-action class="btn-topbar btn-ghost-secondary rounded-circle" href="/" icon="ri-home-smile-2-line fs-22" />
+</div>
 
 <script>
     function startRefresh() {
