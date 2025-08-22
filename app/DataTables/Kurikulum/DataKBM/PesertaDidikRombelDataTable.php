@@ -26,6 +26,37 @@ class PesertaDidikRombelDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($query) {
+                // Tahun ajaran aktif
+                $thAktif = TahunAjaran::aktif()->first()?->tahunajaran;
+
+                // Pencarian nama
+                if (request()->filled('search')) {
+                    $query->where('peserta_didiks.nama_lengkap', 'like', '%' . request('search') . '%');
+                }
+
+                // Tahun ajaran
+                if (request()->filled('thAjar') && request('thAjar') !== 'all') {
+                    $query->where('peserta_didik_rombels.tahun_ajaran', request('thAjar'));
+                } elseif ($thAktif) {
+                    $query->where('peserta_didik_rombels.tahun_ajaran', $thAktif);
+                }
+
+                // Tingkat kelas
+                if (request()->filled('tingKat') && request('tingKat') !== 'all') {
+                    $query->where('peserta_didik_rombels.rombel_tingkat', request('tingKat'));
+                }
+
+                // Kompetensi keahlian
+                if (request()->filled('kodeKK') && request('kodeKK') !== 'all') {
+                    $query->where('peserta_didik_rombels.kode_kk', request('kodeKK'));
+                }
+
+                // Rombel
+                if (request()->filled('romBel') && request('romBel') !== 'all') {
+                    $query->where('peserta_didik_rombels.rombel_kode', request('romBel'));
+                }
+            })
             ->addColumn('nama_siswa', function ($row) {
                 return $row->nama_lengkap; // Mengambil nama siswa dari hasil join
             })
@@ -45,55 +76,15 @@ class PesertaDidikRombelDataTable extends DataTable
      */
     public function query(PesertaDidikRombel $model): QueryBuilder
     {
-        $query = $model->newQuery();
-
-        // Ambil tahun ajaran aktif (hanya sekali di awal)
-        $thAktif = TahunAjaran::aktif()->first()?->tahunajaran;
-
-        // Ambil parameter filter dari request
-        if (request()->has('search') && !empty(request('search'))) {
-            $query->where('peserta_didiks.nama_lengkap', 'like', '%' . request('search') . '%');
-        }
-
-        // Jika request punya thAjar, pakai itu. Kalau tidak, pakai tahun ajaran aktif.
-        if (request('thAjar') && request('thAjar') !== 'all') {
-            $query->where('tahun_ajaran', request('thAjar'));
-        } elseif ($thAktif) {
-            $query->where('tahun_ajaran', $thAktif);
-        }
-
-        /* if (request()->has('thAjar') && request('thAjar') != 'all') {
-            $query->where('tahun_ajaran', request('thAjar'));
-        } */
-
-        if (request()->has('tingKat') && request('tingKat') != 'all') {
-            $query->where('peserta_didik_rombels.rombel_tingkat', request('tingKat'));
-        }
-
-        if (request()->has('kodeKK') && request('kodeKK') != 'all') {
-            $query->where('peserta_didik_rombels.kode_kk', request('kodeKK'));
-        }
-
-        if (request()->has('romBel') && request('romBel') != 'all') {
-            $query->where('rombel_kode', request('romBel'));
-        }
-
-        // Handle ordering
-        if (request()->has('order')) {
-            $orderColumn = request('columns')[request('order')[0]['column']]['data']; // Ambil kolom yang diurutkan
-            $orderDir = request('order')[0]['dir']; // Dapatkan arah pengurutan (asc atau desc)
-
-            $query->orderBy($orderColumn, $orderDir);
-        } else {
-            // Default ordering
-            $query->orderBy('id', 'asc');
-        }
-
-        $query->join('peserta_didiks', 'peserta_didik_rombels.nis', '=', 'peserta_didiks.nis')
+        return $model->newQuery()
+            ->join('peserta_didiks', 'peserta_didik_rombels.nis', '=', 'peserta_didiks.nis')
             ->join('kompetensi_keahlians', 'peserta_didik_rombels.kode_kk', '=', 'kompetensi_keahlians.idkk')
-            ->select('peserta_didik_rombels.*', 'peserta_didiks.nama_lengkap', 'kompetensi_keahlians.nama_kk'); // Tambahkan nama_kk
-
-        return $query;
+            ->select([
+                'peserta_didik_rombels.*',
+                'peserta_didiks.nama_lengkap',
+                'kompetensi_keahlians.nama_kk',
+            ])
+            ->orderBy('peserta_didik_rombels.id', 'asc');
     }
 
     /**

@@ -25,6 +25,23 @@ class MataPelajaranPerJurusanDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($query) {
+                // filter pencarian mapel
+                if (request()->filled('search')) {
+                    $query->where('mata_pelajaran_per_jurusans.mata_pelajaran', 'like', '%' . request('search') . '%');
+                }
+
+                // filter kompetensi keahlian
+                if (request()->filled('kodeKK') && request('kodeKK') !== 'all') {
+                    $query->where('mata_pelajaran_per_jurusans.kode_kk', request('kodeKK'));
+                }
+
+                // filter semester (semester_1 / semester_2)
+                if (request()->filled('semester') && request('semester') !== 'all') {
+                    $semester = 'semester_' . request('semester'); // contoh: 1 → semester_1
+                    $query->where("mata_pelajarans.$semester", 1);
+                }
+            })
             ->addColumn('checkbox', function ($row) {
                 return '<input class="form-check-input chk-child" type="checkbox"
                         name="chk_child"
@@ -50,45 +67,14 @@ class MataPelajaranPerJurusanDataTable extends DataTable
      */
     public function query(MataPelajaranPerJurusan $model): QueryBuilder
     {
-        $query = $model->newQuery();
-
-        // Gabungkan dengan tabel mata_pelajarans berdasarkan kel_mapel
-        $query->join('mata_pelajarans', 'mata_pelajaran_per_jurusans.kel_mapel', '=', 'mata_pelajarans.kel_mapel');
-
-        // Ambil parameter filter dari request
-        if (request()->has('search') && !empty(request('search'))) {
-            $query->where('mata_pelajaran_per_jurusans.mata_pelajaran', 'like', '%' . request('search') . '%');
-        }
-
-        if (request()->has('kodeKK') && request('kodeKK') != 'all') {
-            $query->where('mata_pelajaran_per_jurusans.kode_kk', request('kodeKK'));
-        }
-
-        // Tambahkan filter untuk semester
-        if (request()->has('semester') && request('semester') != 'all') {
-            $semester = 'semester_' . request('semester'); // Misal semester 1 menjadi semester_1
-            $query->where('mata_pelajarans.' . $semester, 1); // Hanya ambil yang bernilai 1
-        }
-
-        // Handle ordering
-        if (request()->has('order')) {
-            $orderColumn = request('columns')[request('order')[0]['column']]['data']; // Ambil kolom yang diurutkan
-            $orderDir = request('order')[0]['dir']; // Dapatkan arah pengurutan (asc atau desc)
-
-            $query->orderBy($orderColumn, $orderDir);
-        } else {
-            // Default ordering
-            $query->orderBy('mata_pelajaran_per_jurusans.kode_mapel', 'asc');
-        }
-
-        // Pilih kolom yang akan ditampilkan
-        $query->select([
-            'mata_pelajaran_per_jurusans.*',
-            DB::raw('CONCAT(mata_pelajaran_per_jurusans.kode_kk, " - ", kompetensi_keahlians.nama_kk) as kode_kk_singkatan_kk'),
-        ])
-            ->join('kompetensi_keahlians', 'mata_pelajaran_per_jurusans.kode_kk', '=', 'kompetensi_keahlians.idkk');
-
-        return $query;
+        return $model->newQuery()
+            ->join('mata_pelajarans', 'mata_pelajaran_per_jurusans.kel_mapel', '=', 'mata_pelajarans.kel_mapel')
+            ->join('kompetensi_keahlians', 'mata_pelajaran_per_jurusans.kode_kk', '=', 'kompetensi_keahlians.idkk')
+            ->select([
+                'mata_pelajaran_per_jurusans.*',
+                DB::raw('CONCAT(mata_pelajaran_per_jurusans.kode_kk, " - ", kompetensi_keahlians.nama_kk) as kode_kk_singkatan_kk'),
+            ])
+            ->orderBy('mata_pelajaran_per_jurusans.kode_mapel', 'asc');
     }
 
 
