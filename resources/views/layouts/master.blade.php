@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <meta name="csrf_token" content="{{ csrf_token() }}">
         <title>@yield('title') | {{ $profileApp->app_nama ?? '' }}</title>
+        <meta name="page-title" content="@yield('title')">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="{{ $profileApp->app_deskripsi ?? '' }}" name="description" />
         <meta content="{{ $profileApp->app_pengembang ?? '' }}" name="author" />

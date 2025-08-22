@@ -46,7 +46,7 @@
                     </li>
                     <li class="list-inline-item float-sm-right">
                         <div class="">
-                            <a href="{{ url('/dashboard') }}"
+                            <a href="{{ url('/skaone/program') }}"
                                 class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-35 g-py-13">Isi
                                 Form</a>
                         </div>

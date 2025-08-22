@@ -236,7 +236,7 @@ function handleDataTableEvents(tableId, emptyMessage = 'Silakan untuk ditambahka
     $('#' + tableId).on('draw.dt', function() {
         const table = $('#' + tableId).DataTable();
         if (table.data().count() === 0) {
-            const pageTitle = 'Data ' + document.title +
+            const pageTitle = 'Data ' + document.querySelector('meta[name="page-title"]').content +
                 ' <br><h2 class="mt-4 text-danger">Masih Kosong</h2>';
             Swal.fire({
                 icon: 'info',
