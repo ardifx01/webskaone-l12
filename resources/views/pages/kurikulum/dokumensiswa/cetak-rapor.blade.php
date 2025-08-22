@@ -68,7 +68,7 @@
         <div class="col-xxl-12">
             <div class="card d-lg-flex gap-1 mx-n3 mt-n3 p-1 mb-2">
                 <div class="row g-0">
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="card-header">
                             <div class="row" id="info-wali-siswa">
                                 @include('pages.kurikulum.dokumensiswa.cetak-rapor-info')
@@ -138,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 border-start">
+                    <div class="col-lg-3 border-start">
                         <div class="card-body p-0">
                             <div>
                                 <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
@@ -159,7 +159,7 @@
                                             <div class="dropdown">
                                                 <a class="nav-link fw-medium text-reset mb-n1" href="#" role="button"
                                                     id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-settings-4-line align-middle me-1"></i> Settings
+                                                    <i class="ri-settings-4-line align-middle me-1"></i>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                                     <li>
