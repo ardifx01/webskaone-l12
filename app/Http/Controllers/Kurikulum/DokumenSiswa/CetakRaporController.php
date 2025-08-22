@@ -686,23 +686,15 @@ class CetakRaporController extends Controller
             'status' => 'required|in:Sudah,Belum',
         ]);
 
-        $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')->first();
-        if (!$tahunAjaranAktif) {
-            return response()->json(['message' => 'Tidak ada tahun ajaran aktif.'], 400);
-        }
+        $user = Auth::user();
+        $personal_id = $user->personal_id;
 
-        $semester = Semester::where('status', 'Aktif')
-            ->where('tahun_ajaran_id', $tahunAjaranAktif->id)
-            ->first();
-
-        if (!$semester) {
-            return response()->json(['message' => 'Tidak ada semester aktif.'], 400);
-        }
+        $dataPilCR = PilihCetakRapor::where('id_personil', $personal_id)->first();
 
         CeklistCetakRapor::updateOrCreate(
             [
-                'tahunajaran' => $tahunAjaranAktif->tahunajaran, // asumsi field ini teks
-                'ganjilgenap' => $semester->semester,
+                'tahunajaran' => $dataPilCR->tahunajaran, // asumsi field ini teks
+                'ganjilgenap' => $dataPilCR->semester,
                 'kode_rombel' => $request->kode_rombel,
             ],
             [
@@ -715,13 +707,13 @@ class CetakRaporController extends Controller
 
     public function getCeklistTerupdate()
     {
-        $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')->first();
-        $semester = Semester::where('status', 'Aktif')
-            ->where('tahun_ajaran_id', $tahunAjaranAktif->id)
-            ->first();
+        $user = Auth::user();
+        $personal_id = $user->personal_id;
 
-        $ceklistTersimpan = CeklistCetakRapor::where('tahunajaran', $tahunAjaranAktif->tahunajaran)
-            ->where('ganjilgenap', $semester->semester)
+        $dataPilCR = PilihCetakRapor::where('id_personil', $personal_id)->first();
+
+        $ceklistTersimpan = CeklistCetakRapor::where('tahunajaran', $dataPilCR->tahunajaran)
+            ->where('ganjilgenap', $dataPilCR->semester)
             ->where('status', 'Sudah')
             ->pluck('kode_rombel');
 

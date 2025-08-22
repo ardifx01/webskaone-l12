@@ -1,6 +1,6 @@
 <div class="card ribbon-box border shadow-none mb-lg-0 mt-4 mt-lg-0">
     <div class="card-body">
-        <div class="ribbon ribbon-primary round-shape">Ceklist Kelas Sudah Cetak</div>
+        <div class="ribbon ribbon-primary round-shape">Sudah Cetak</div>
         @if ($dataPilCR)
             <h5 class="fs-14 text-end">{{ $dataPilCR->tahunajaran }} / {{ $dataPilCR->semester }}</h5>
         @else
