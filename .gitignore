@@ -1,25 +1,47 @@
-*.log
-.DS_Store
+# Laravel environment
 .env
-.env.backup
+.env.*.backup
 .env.production
-.phpactor.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Laravel caches
 .phpunit.result.cache
-/.fleet
-/.idea
-/.nova
 /.phpunit.cache
+/.phpunit.result.cache
+/.phpunit.cache
+/storage/*.key
+
+# Laravel IDE helpers & tools
+/.idea
 /.vscode
+/.fleet
 /.zed
-/auth.json
+/.nova
+/.phpactor.json
+/Homestead.json
+/Homestead.yaml
+
+# Node
 /node_modules
+/public/hot
+
+# Storage (kecuali untuk public storage)
+ /storage/debugbar
+ /storage/framework/cache/*
+ /storage/framework/sessions/*
+ /storage/framework/views/*
+ !/storage/framework/.gitignore
+ /storage/logs/*
+ !/storage/logs/.gitignore
+ /storage/pail
+
+# Public uploads
+/public/storage
 /images
 /perangkat-ajar
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
+
+# Keep vendor (supaya ikut di push)
 /vendor
-Homestead.json
-Homestead.yaml
-Thumbs.db
