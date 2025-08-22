@@ -107,6 +107,18 @@
 
                         </div>
                     @endforeach
+                    @php
+                        // Query untuk mendapatkan data berdasarkan kode_kk
+                        $photo = DB::table('photo_jurusans')->where('kode_kk', '411')->first();
+
+                        // Tentukan path gambar
+                        $imagePath =
+                            $photo && $photo->image
+                                ? asset('images/jurusan_gmb/' . $photo->image)
+                                : asset('images/jurusan_gmb/default.jpg');
+                    @endphp
+                    <img src="{{ $imagePath }}" alt="photo jurusan"
+                        class="img-fluid img-thumbnail g-rounded-10 g-mb-20 mt-4">
                 </div>
             </div>
             <div class="col-md-9">
@@ -136,17 +148,7 @@
                                     <x-variasi-ceklist-one>{{ $item->deskripsi }}</x-variasi-ceklist-one>
                                 @endforeach
                             @endif
-                            @php
-                                // Query untuk mendapatkan data berdasarkan kode_kk
-                                $photo = DB::table('photo_jurusans')->where('kode_kk', '411')->first();
 
-                                // Tentukan path gambar
-                                $imagePath =
-                                    $photo && $photo->image
-                                        ? asset('images/jurusan_gmb/' . $photo->image)
-                                        : asset('images/jurusan_gmb/default.jpg');
-                            @endphp
-                            <img src="{{ $imagePath }}" alt="client-img" class="mx-auto img-fluid d-block mt-5">
                         </div>
                         <!-- End Footer Content -->
                     </div>
@@ -155,7 +157,7 @@
                 <!-- End Footer -->
                 <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
                     @if ($personilRPL->isNotEmpty())
-                        <h2>Guru Produktif</h2>
+                        <h2>Guru Produktif Rekayasa Perangkat Lunak</h2>
                         <div class="row">
                             @foreach ($personilRPL as $personil)
                                 <div class="col-sm-7 col-lg-4 g-mb-30">
