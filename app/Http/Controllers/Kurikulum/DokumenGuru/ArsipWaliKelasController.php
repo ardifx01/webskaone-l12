@@ -47,7 +47,7 @@ class ArsipWaliKelasController extends Controller
         $rombonganBelajar = RombonganBelajar::pluck('rombel', 'kode_rombel')->toArray();
 
         // Ambil semua user yang punya role 'master'
-        $usersWithMasterRole = User::role('master')->get();
+        $usersWithMasterRole = User::role('admin')->get();
 
         // Ambil semua id_personil dari user tersebut
         $idPersonilList = $usersWithMasterRole->pluck('personal_id')->filter()->unique();
