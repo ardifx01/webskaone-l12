@@ -68,7 +68,7 @@
         <div class="col-xxl-12">
             <div class="card d-lg-flex gap-1 mx-n3 mt-n3 p-1 mb-2">
                 <div class="row g-0">
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
                         <div class="card-header">
                             <div class="row" id="info-wali-siswa">
                                 @include('pages.kurikulum.dokumensiswa.cetak-rapor-info')
@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="px-4 mx-n4" data-simplebar style="height: calc(100vh - 332px);">
+                                <div class="px-4 mx-n4" data-simplebar style="height: calc(100vh - 304px);">
                                     <div id="siswa-detail">
                                         <div class="alert alert-primary alert-dismissible alert-label-icon rounded-label fade show mt-4"
                                             role="alert">
@@ -138,25 +138,57 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 border-start">
-                        <div class="card-header d-flex align-items-center">
-                            <h5 class="card-title mb-0 flex-grow-1 text-danger-emphasis">Pilih Data Cetak </h5>
+                    <div class="col-lg-4 border-start">
+                        <div class="card-body p-0">
                             <div>
-                                @if ($personal_id == 'Pgw_0016')
-                                    <button type="button" class="btn btn-soft-primary btn-sm w-100" data-bs-toggle="modal"
-                                        data-bs-target="#tambahPilihCetakRapor"><i
-                                            class="ri-file-download-line align-bottom me-1"></i>
-                                        Tambah Penguna</button>
-                                @endif
+                                <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#cetak" role="tab"
+                                            aria-selected="false">
+                                            <i class="ri-printer-line text-muted align-bottom me-1"></i> Cetak Cetak
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" id="images-tab" href="#ceklist"
+                                            role="tab" aria-selected="true">
+                                            <i class="ri-checkbox-multiple-fill text-muted align-bottom me-1"></i> Ceklist
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ms-auto">
+                                        @if ($personal_id == 'Pgw_0016')
+                                            <div class="dropdown">
+                                                <a class="nav-link fw-medium text-reset mb-n1" href="#" role="button"
+                                                    id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="ri-settings-4-line align-middle me-1"></i> Settings
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                                    <li>
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#tambahPilihCetakRapor">Tambah Akses</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endif
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            @include('pages.kurikulum.dokumensiswa.cetak-rapor-form')
+                            <div class="card-body p-4">
+                                <div class="tab-content text-muted">
+                                    <div class="tab-pane active" id="cetak" role="tabpanel">
+                                        <div class="pb-3">
+                                            @include('pages.kurikulum.dokumensiswa.cetak-rapor-form')
+                                        </div>
 
-                            <!-- Rounded Ribbon -->
-                            <div id="data-ceklist">
-                                @include('pages.kurikulum.dokumensiswa.cetak-rapor-ceklist')
-                            </div>
+                                        <div class="border border-dashed"></div>
+
+                                    </div>
+                                    <div class="tab-pane" id="ceklist" role="tabpanel">
+                                        <div id="data-ceklist">
+                                            @include('pages.kurikulum.dokumensiswa.cetak-rapor-ceklist')
+                                        </div>
+                                    </div><!--end tab-pane-->
+                                </div><!--end tab-content-->
+                            </div><!--end card-body-->
                         </div>
                     </div>
                 </div>
