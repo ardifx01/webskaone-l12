@@ -14,13 +14,8 @@
         @csrf
         <div class="mb-3">
             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-            <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                id="email" name="email" placeholder="Enter Email" required autofocus autocomplete="username">
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <input type="email" class="form-control" value="{{ old('email') }}" id="email" name="email"
+                placeholder="Enter Email" required autofocus autocomplete="username">
         </div>
 
         <div class="mb-3">
@@ -32,16 +27,10 @@
             </div>
             <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
             <div class="position-relative auth-pass-inputgroup mb-3">
-                <input type="password" id="password" value="{{ old('password') }}"
-                    class="form-control password-input pe-5 @error('password') is-invalid @enderror" name="password"
-                    placeholder="Enter password" required autocomplete="current-password">
+                <input type="password" id="password" value="{{ old('password') }}" class="form-control password-input pe-5"
+                    name="password" placeholder="Enter password" required autocomplete="current-password">
                 <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                     type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
         </div>
 

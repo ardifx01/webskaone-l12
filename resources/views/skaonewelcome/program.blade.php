@@ -8,7 +8,7 @@
 @section('content')
     <!-- Promo Block -->
     <div class="g-bg-img-hero g-pos-rel" style="background-image: url({{ URL::asset('build/assets/img/bg/bg-img1.png') }});">
-        <div class="container g-pt-100">
+        <div class="container g-pt-25">
             <div class="row justify-content-lg-between">
                 <div class="col-lg-4 g-pt-50--lg">
                     <div class="mb-5">

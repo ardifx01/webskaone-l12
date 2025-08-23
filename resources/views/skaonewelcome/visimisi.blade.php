@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="g-bg-img-hero g-pos-rel" style="background-image: url({{ URL::asset('build/assets/img/bg/bg-img1.png') }});">
-        <div class="container g-pt-100">
+        <div class="container g-pt-25">
             <div class="row justify-content-lg-between">
                 <div class="col-lg-4">
                     <div class="mb-5">
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Mockup Block -->
-    <section class="container g-py-100">
+    <section class="container g-py-75">
         <div class="text-center g-mb-50">
             <h2 class="h1 g-color-black g-font-weight-600">Misi SMKN 1 Kadipaten</h2>
         </div>
