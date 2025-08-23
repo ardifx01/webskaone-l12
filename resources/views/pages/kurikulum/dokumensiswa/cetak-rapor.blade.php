@@ -155,7 +155,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item ms-auto">
-                                        @if ($personal_id == 'Pgw_0016')
+                                        @role('master')
                                             <div class="dropdown">
                                                 <a class="nav-link fw-medium text-reset mb-n1" href="#" role="button"
                                                     id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -168,7 +168,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                        @endif
+                                        @endrole
                                     </li>
                                 </ul>
                             </div>
