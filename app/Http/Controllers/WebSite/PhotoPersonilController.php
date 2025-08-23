@@ -140,7 +140,7 @@ class PhotoPersonilController extends Controller
         $photo_personil->fill($request->except(['photo']));
         $photo_personil->save();
 
-        return responseSuccess();
+        return responseSuccess(true);
     }
 
     /**

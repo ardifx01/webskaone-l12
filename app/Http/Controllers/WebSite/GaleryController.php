@@ -129,7 +129,7 @@ class GaleryController extends Controller
         $galery->fill($request->except(['image']));
         $galery->save();
 
-        return responseSuccess();
+        return responseSuccess(true);
     }
 
     /**

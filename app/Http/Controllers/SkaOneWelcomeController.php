@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kurikulum\DataKBM\PesertaDidikRombel;
 use App\Models\ManajemenSekolah\KetuaProgramStudi;
+use App\Models\ManajemenSekolah\KompetensiKeahlian;
 use App\Models\ManajemenSekolah\PersonilSekolah;
 use App\Models\ManajemenSekolah\Semester;
 use App\Models\ManajemenSekolah\TahunAjaran;
@@ -22,53 +23,6 @@ class SkaOneWelcomeController extends Controller
 
     public function program()
     {
-        /* // Ambil tahun ajaran yang aktif
-        $tahunAjaran = TahunAjaran::where('status', 'Aktif')->first();
-
-        // Periksa jika tidak ada tahun ajaran aktif
-        if (!$tahunAjaran) {
-            return redirect()->back()->with('error', 'Tidak ada tahun ajaran aktif.');
-        }
-
-        // Ambil semester yang aktif berdasarkan tahun ajaran
-        $semester = Semester::where('status', 'Aktif')
-            ->where('tahun_ajaran_id', $tahunAjaran->id)
-            ->first();
-
-        // Periksa jika tidak ada semester aktif
-        if (!$semester) {
-            return redirect()->back()->with('error', 'Tidak ada semester aktif.');
-        }
-        // Menghitung jumlah siswa per kode_kk dan per tingkat (rombel_tingkat)
-        $dataSiswa = PesertaDidikRombel::where('tahun_ajaran', $tahunAjaran->tahunajaran)
-            ->select('kode_kk', 'rombel_tingkat', DB::raw('count(*) as jumlah_siswa'))
-            ->groupBy('kode_kk', 'rombel_tingkat')
-            ->orderBy('kode_kk')
-            ->get();
-
-        // Buat variabel untuk menyimpan data berdasarkan kode_kk
-        $jumlahSiswaPerKK = [
-            '411' => [],
-            '421' => [],
-            '811' => [],
-            '821' => [],
-            '833' => [],
-        ];
-
-        // Mengisi data berdasarkan kode_kk
-        foreach ($dataSiswa as $data) {
-            if (array_key_exists($data->kode_kk, $jumlahSiswaPerKK)) {
-                $jumlahSiswaPerKK[$data->kode_kk][] = $data;
-            }
-        }
-
-        // Menghitung total siswa per kode_kk
-        $totalSiswaPerKK = [];
-        foreach ($jumlahSiswaPerKK as $kodeKK => $data) {
-            $totalSiswaPerKK[$kodeKK] = array_sum(array_column($data, 'jumlah_siswa'));
-        }
- */
-
         // Cari tahun ajaran aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')->first();
 
@@ -125,7 +79,7 @@ class SkaOneWelcomeController extends Controller
         }
 
 
-        $personilData = PhotoPersonil::select(
+        /* $personilData = PhotoPersonil::select(
             'photo_personils.id',
             'photo_personils.no_group',
             'photo_personils.nama_group',
@@ -147,7 +101,34 @@ class SkaOneWelcomeController extends Controller
         $personilBisnisDigital = $groupedData->get('Bisnis Digital', collect());
         $personilMPerkantoran = $groupedData->get('Manajemen Perkantoran', collect());
         $personilRPL = $groupedData->get('Rekayasa Perangkat Lunak', collect());
-        $personilTKJ = $groupedData->get('Teknik Komputer dan Jaringan', collect());
+        $personilTKJ = $groupedData->get('Teknik Komputer dan Jaringan', collect()); */
+
+        $personilData = PhotoPersonil::select(
+            'photo_personils.id',
+            'photo_personils.no_group',
+            'photo_personils.nama_group',
+            'photo_personils.no_personil',
+            'photo_personils.id_personil',
+            'photo_personils.photo',
+            'personil_sekolahs.gelardepan',
+            'personil_sekolahs.namalengkap',
+            'personil_sekolahs.gelarbelakang',
+            'kompetensi_keahlians.idkk' // join untuk dapatkan idkk
+        )
+            ->join('personil_sekolahs', 'personil_sekolahs.id_personil', '=', 'photo_personils.id_personil')
+            ->join('kompetensi_keahlians', 'kompetensi_keahlians.nama_kk', '=', 'photo_personils.nama_group')
+            ->whereIn('photo_personils.nama_group', [
+                'Akuntansi',
+                'Bisnis Digital',
+                'Manajemen Perkantoran',
+                'Rekayasa Perangkat Lunak',
+                'Teknik Komputer dan Jaringan'
+            ])
+            ->orderByRaw('CAST(photo_personils.no_personil AS UNSIGNED)')
+            ->get();
+
+        $personil = $personilData->groupBy('idkk');
+
 
         //tampilkan kaprodi masing-masing konsentrasi keahlian
         $tampilKaprodi = KetuaProgramStudi::select(
@@ -175,25 +156,29 @@ class SkaOneWelcomeController extends Controller
                 return $items->groupBy('tipe'); // di dalamnya dibagi lagi per tipe
             });
 
+
+        $kompetensiKeahlians = KompetensiKeahlian::orderBy('idkk')->get();
+
+
         return view(
             'skaonewelcome.program',
             [
-                /* 'tahunAjaran' => $tahunAjaran,
-                'semester' => $semester, */
-
                 'tahunAjarans' => $tahunAjarans,
                 'dataPerTahunAjaran' => $dataPerTahunAjaran,
                 'tahunAjaranAktif' => $tahunAjaranAktif,
 
                 'jumlahSiswaPerKK' => $jumlahSiswaPerKK,
                 'totalSiswaPerKK' => $totalSiswaPerKK,
-                'personilAkuntansi' => $personilAkuntansi,
+                /* 'personilAkuntansi' => $personilAkuntansi,
                 'personilBisnisDigital' => $personilBisnisDigital,
                 'personilMPerkantoran' => $personilMPerkantoran,
                 'personilRPL' => $personilRPL,
-                'personilTKJ' => $personilTKJ,
+                'personilTKJ' => $personilTKJ, */
                 'tampilKaprodi' => $tampilKaprodi,
                 'dataProfil' => $dataProfil,
+                'personil' => $personil,
+
+                'kompetensiKeahlians' => $kompetensiKeahlians,
             ]
         );
     }

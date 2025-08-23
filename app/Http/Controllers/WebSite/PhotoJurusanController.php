@@ -110,7 +110,7 @@ class PhotoJurusanController extends Controller
         $photoJurusan->fill($request->except(['image']));
         $photoJurusan->save();
 
-        return responseSuccess();
+        return responseSuccess(true);
     }
 
     /**

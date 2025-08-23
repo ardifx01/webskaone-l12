@@ -7,99 +7,44 @@
     <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/fancybox/jquery.fancybox.css') }}">
 @endsection
 @section('content')
-    <!-- Carousel Slider -->
+    <!-- SLIDE DEPAN -->
     <div class="js-carousel u-carousel-v5" data-infinite="true" data-autoplay="true" data-speed="8000"
         data-pagi-classes="u-carousel-indicators-v34 g-absolute-centered--y g-left-auto g-right-30 g-right-100--md"
         data-calc-target="#js-header">
 
-        <!-- Carousel Slides -->
-        <div class="js-slide h-100 g-flex-centered g-bg-img-hero g-bg-cover g-bg-black-opacity-0_3--after"
-            style="background-image: url({{ URL::asset('images/sakola/misisekolah4.jpg') }});">
-            <div class="container">
-                <div class="g-max-width-600 g-pos-rel g-z-index-1">
-                    <a class="d-block g-text-underline--none--hover" href="#">
-                        {{-- <span class="d-block g-color-white g-font-size-20--md mb-2">
-                            Making an Impact : <span
-                                class="g-brd-bottom--dashed g-brd-2 g-brd-primary g-color-primary g-font-weight-700 g-pb-2">Careers
-                                Day</span>
-                        </span> --}}
-                        <span
-                            class="d-block g-color-white g-font-secondary g-font-size-25 g-font-size-45--md g-line-height-1_4">
-                            Pencetak lulusan yang kompeten dan berintegritas terbaik di Jawa Barat pada tahun 2029
-                        </span>
+        @foreach ($slides as $slide)
+            <div class="js-slide h-100 g-flex-centered g-bg-img-hero g-bg-cover {{ $slide['overlay'] }}"
+                style="background-image: url({{ asset('images/photoslide/' . $slide['image']) }});">
+                <div class="container">
+                    <div class="g-max-width-600 g-pos-rel g-z-index-1">
+                        <a class="d-block g-text-underline--none--hover" href="#">
+
+                            {{-- Subtitle opsional --}}
+                            @if (!empty($slide['subtitle']))
+                                <span class="d-block g-color-white g-font-size-20--md mb-2">
+                                    {{ $slide['subtitle'] }}
+                                </span>
+                            @endif
+
+                            {{-- Title utama --}}
+                            <span
+                                class="d-block g-color-white g-font-secondary g-font-size-25 g-font-size-45--md g-line-height-1_4">
+                                {{ $slide['title'] }}
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Go to Button -->
+                    <a class="js-go-to d-flex align-items-center g-color-white g-pos-abs g-bottom-0 g-z-index-1 g-text-underline--none--hover g-pb-60"
+                        href="#!" data-target="#content">
+                        <span class="d-block u-go-to-v4 mr-3"></span>
+                        <span class="g-brd-bottom--dashed g-brd-white-opacity-0_5 mr-1">scroll down</span> to find out more
                     </a>
+                    <!-- End Go to Button -->
                 </div>
-
-                <!-- Go to Button -->
-                <a class="js-go-to d-flex align-items-center g-color-white g-pos-abs g-bottom-0 g-z-index-1 g-text-underline--none--hover g-pb-60"
-                    href="#!" data-target="#content">
-                    <span class="d-block u-go-to-v4 mr-3"></span>
-                    <span class="g-brd-bottom--dashed g-brd-white-opacity-0_5 mr-1">scroll down</span> to find
-                    out more
-                </a>
-                <!-- End Go to Button -->
             </div>
-        </div>
-        <!-- End Carousel Slides -->
-
-        <!-- Carousel Slides -->
-        <div class="js-slide h-100 g-flex-centered g-bg-img-hero g-bg-cover g-bg-black-opacity-0_2--after"
-            style="background-image: url({{ URL::asset('images/sakola/misisekolah.jpg') }});">
-            <div class="container">
-                <div class="g-max-width-600 g-pos-rel g-z-index-1">
-                    <a class="d-block g-text-underline--none--hover" href="#">
-                        <span class="d-block g-color-white g-font-size-20--md mb-2">
-                            Pembentukan Karakter dan Integritas:
-                        </span>
-                        <span
-                            class="d-block g-color-white g-font-secondary g-font-size-25 g-font-size-45--md g-line-height-1_4">
-                            Mengimplementasikan program pendidikan karakter yang
-                            menekankan nilai-nilai profil pelajar Pancasila.
-                        </span>
-                    </a>
-                </div>
-
-                <!-- Go to Button -->
-                <a class="js-go-to d-flex align-items-center g-color-white g-pos-abs g-bottom-0 g-z-index-1 g-text-underline--none--hover g-pb-60"
-                    href="#!" data-target="#content">
-                    <span class="d-block u-go-to-v4 mr-3"></span>
-                    <span class="g-brd-bottom--dashed g-brd-white-opacity-0_5 mr-1">scroll down</span> to find
-                    out more
-                </a>
-                <!-- End Go to Button -->
-            </div>
-        </div>
-        <!-- End Carousel Slides -->
-
-        <!-- Carousel Slides -->
-        <div class="js-slide h-100 g-flex-centered g-bg-img-hero g-bg-pos-top-center g-bg-cover g-bg-black-opacity-0_3--after"
-            style="background-image: url({{ URL::asset('images/gerbang.jpg') }});">
-            <div class="container">
-                <div class="g-max-width-600 g-pos-rel g-z-index-1">
-                    <a class="d-block g-text-underline--none--hover" href="#">
-                        <span class="d-block g-color-white g-font-size-20--md mb-2">
-                            Fasilitas dan Infrastruktur :
-                        </span>
-                        <span
-                            class="d-block g-color-white g-font-secondary g-font-size-25 g-font-size-45--md g-line-height-1_4">
-                            Meningkatkan dan memperbarui fasilitas pendidikan agar sesuai dengan standar industri modern.
-                        </span>
-                    </a>
-                </div>
-
-                <!-- Go to Button -->
-                <a class="js-go-to d-flex align-items-center g-color-white g-pos-abs g-bottom-0 g-z-index-1 g-text-underline--none--hover g-pb-60"
-                    href="#!" data-target="#content">
-                    <span class="d-block u-go-to-v4 mr-3"></span>
-                    <span class="g-brd-bottom--dashed g-brd-white-opacity-0_5 mr-1">scroll down</span> to find
-                    out more
-                </a>
-                <!-- End Go to Button -->
-            </div>
-        </div>
-        <!-- End Carousel Slides -->
+        @endforeach
     </div>
-    <!-- End Carousel Slider -->
 
     <!-- Find a Course -->
     <div id="content" class="u-shadow-v34 g-bg-main g-pos-rel g-z-index-1 g-pt-40 g-pb-10">
@@ -153,65 +98,63 @@
 
                     <div class="col-md-8 g-mb-30">
                         <h2 class="mb-3"><a class="h2 u-link-v5 g-color-main g-color-primary--hover"
-                                href="#">Sekolah
-                                Legend Berbasis Karakter</a></h2>
+                                href="#">Sekolah Legend Berbasis Karakter</a></h2>
                         <p class="g-font-size-17 mb-0">Assalamu'alaikum warahmatullahi wabarakatuh,
                         <p class="g-font-size-17 mb-0">Salam sejahtera untuk kita semua,
 
-                        <p class="g-font-size-17 mb-0">
+                            <style>
+                                .paragraf {
+                                    text-align: justify;
+                                    /* rata kiri-kanan */
+                                    text-indent: 40px;
+                                    /* menjorok di awal paragraf */
+                                    font-size: 17px;
+                                    margin-bottom: 0;
+                                    margin-top: 12px;
+                                }
+                            </style>
+
+                        <p class="g-font-size-17 mb-0 text-justify">
                             <span class="u-dropcap-bg g-bg-primary g-color-white g-mr-20 g-mb-5">P</span>uji syukur
-                            kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa,
-                            atas segala rahmat dan
-                            karunia-Nya
+                            kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas segala rahmat dan karunia-Nya
                             sehingga kita dapat terus menjalankan peran kita dalam mendidik generasi muda yang berkarakter
                             dan berdaya saing tinggi.
-                        <p class="g-font-size-17 mb-0">Selamat datang di website resmi SMKN 1 Kadipaten, sebuah media yang
-                            kami hadirkan untuk mendukung transparansi, komunikasi, dan informasi bagi seluruh civitas
-                            akademika
-                            dan masyarakat.
 
-                        <p class="g-font-size-17 mb-0">SMKN 1 Kadipaten bangga menyebut dirinya sebagai Sekolah Legend
+                        <p class="paragraf">Selamat datang di website resmi SMKN 1 Kadipaten, sebuah media yang
+                            kami hadirkan untuk mendukung transparansi, komunikasi, dan informasi bagi seluruh civitas
+                            akademika dan masyarakat.
+
+                        <p class="paragraf">SMKN 1 Kadipaten bangga menyebut dirinya sebagai Sekolah Legend
                             Berbasis Karakter. Sebutan ini tidak hanya menjadi identitas, tetapi juga tanggung jawab besar
                             bagi kami untuk terus melahirkan lulusan yang unggul, tidak hanya dari segi kompetensi kejuruan
                             tetapi juga dari segi moral, etika, dan karakter.
 
-                        <p class="g-font-size-17 mb-0">Dalam era digital yang penuh tantangan ini, pendidikan berbasis
-                            karakter menjadi kunci utama
-                            dalam
-                            mencetak generasi yang tidak hanya cerdas secara intelektual tetapi juga memiliki integritas,
-                            kejujuran,
-                            disiplin, dan rasa tanggung jawab. SMKN 1 Kadipaten berkomitmen untuk menjadi sekolah yang
-                            adaptif
-                            terhadap perubahan zaman tanpa melupakan nilai-nilai luhur budaya bangsa.
-                    </div>
+                        <p class="paragraf">Dalam era digital yang penuh tantangan ini, pendidikan berbasis
+                            karakter menjadi kunci utama dalam mencetak generasi yang tidak hanya cerdas secara intelektual
+                            tetapi juga memiliki integritas, kejujuran, disiplin, dan rasa tanggung jawab. SMKN 1 Kadipaten
+                            berkomitmen untuk menjadi sekolah yang adaptif terhadap perubahan zaman tanpa melupakan
+                            nilai-nilai luhur budaya bangsa.
 
-                    <div class="col-md-12 g-mb-30">
-                        <p class="g-font-size-17 mb-0">
-                            Kami menyadari
-                            bahwa keberhasilan ini tidak dapat dicapai tanpa
-                            dukungan dari berbagai pihak.
+                        <p class="paragraf">
+                            Kami menyadari bahwa keberhasilan ini tidak dapat dicapai tanpa dukungan dari berbagai pihak.
                             Oleh karena itu, kami mengajak seluruh siswa, guru, tenaga kependidikan, orang tua, alumni, dan
                             masyarakat untuk terus bersinergi menciptakan lingkungan pendidikan yang harmonis dan inovatif.
 
-                        <p class="g-font-size-17 mb-0">Melalui website ini, kami berharap dapat memberikan layanan
-                            informasi
-                            yang cepat, akurat, dan
-                            relevan.
+                        <p class="paragraf">Melalui website ini, kami berharap dapat memberikan layanan informasi
+                            yang cepat, akurat, dan relevan.
 
-                        <p class="g-font-size-17 mb-0">Silakan eksplorasi berbagai fitur yang telah kami sediakan, mulai
-                            dari informasi akademik,
-                            kegiatan sekolah, hingga prestasi siswa. Kami juga sangat terbuka terhadap masukan dan saran
-                            demi kemajuan SMKN 1 Kadipaten.
+                        <p class="paragraf">Silakan eksplorasi berbagai fitur yang telah kami sediakan, mulai
+                            dari informasi akademik, kegiatan sekolah, hingga prestasi siswa. Kami juga sangat terbuka
+                            terhadap masukan dan saran demi kemajuan SMKN 1 Kadipaten.
 
-                        <p class="g-font-size-17 mb-0">Akhir kata, mari bersama-sama kita wujudkan SMKN 1 Kadipaten sebagai
-                            sekolah yang tidak hanya
-                            menjadi legenda dalam nama, tetapi juga dalam kontribusinya terhadap masyarakat dan bangsa.
+                        <p class="paragraf">Akhir kata, mari bersama-sama kita wujudkan SMKN 1 Kadipaten sebagai
+                            sekolah yang tidak hanya menjadi legenda dalam nama, tetapi juga dalam kontribusinya terhadap
+                            masyarakat dan bangsa.
 
-                        <p class="g-font-size-17 mb-0">Terima kasih atas perhatian dan dukungan Anda. Semoga Allah SWT
-                            senantiasa meridhoi langkah kita
-                            semua.
+                        <p class="paragraf">Terima kasih atas perhatian dan dukungan Anda. Semoga Allah SWT
+                            senantiasa meridhoi langkah kita semua.
 
-                        <p class="g-font-size-17 mb-0">Wassalamu'alaikum warahmatullahi wabarakatuh.
+                        <p class="paragraf">Wassalamu'alaikum warahmatullahi wabarakatuh.
                     </div>
                 </div>
             </div>

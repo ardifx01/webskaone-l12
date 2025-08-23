@@ -22,24 +22,31 @@ class PhotoSlideRequest extends FormRequest
     public function rules()
     {
         return [
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi untuk file gambar
-            'alt_text' => 'nullable|string|max:255', // teks alternatif opsional
-            'interval' => 'required|integer|min:1000', // interval tampilan (minimal 1000ms)
-            'is_active' => 'required|boolean', // status aktif atau tidak
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'subtitle' => 'nullable|string|max:255',
+            'title' => 'required|string|max:255',
+            'overlay' => 'required|string|max:255',
+            'order' => 'required|integer|min:1',
+            'active' => 'required|boolean',
         ];
     }
 
     public function messages()
     {
         return [
-            'gambar.image' => 'File harus berupa gambar.',
-            'gambar.mimes' => 'Format gambar harus berupa jpeg, png, jpg, atau gif.',
-            'gambar.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
-            'interval.required' => 'Interval waktu harus diisi.',
-            'interval.integer' => 'Interval harus berupa angka.',
-            'interval.min' => 'Interval minimum adalah 1000 milidetik.',
-            'is_active.required' => 'Status aktif harus diisi.',
-            'is_active.boolean' => 'Status aktif harus berupa nilai benar atau salah.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.mimes' => 'Format gambar harus berupa jpeg, png, jpg, atau gif.',
+            'image.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
+
+            'title.required' => 'Title harus diisi.',
+            'overlay.required' => 'overlay harus diisi.',
+
+            'order.required' => 'order waktu harus diisi.',
+            'order.integer' => 'order harus berupa angka.',
+            'order.min' => 'order minimum adalah 1000 milidetik.',
+
+            'active.required' => 'Status aktif harus diisi.',
+            'active.boolean' => 'Status aktif harus berupa nilai benar atau salah.',
         ];
     }
 }

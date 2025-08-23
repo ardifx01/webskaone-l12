@@ -36,21 +36,21 @@ class PhotoSlideController extends Controller
      */
     public function store(PhotoSlideRequest $request)
     {
-        $photoSlide = new PhotoSlide($request->except(['gambar']));
+        $photoSlide = new PhotoSlide($request->except(['image']));
 
-        if ($request->hasFile('gambar')) {
-            $imageFile = $request->file('gambar');
+        if ($request->hasFile('image')) {
+            $imageFile = $request->file('image');
 
             $imageName = ImageHelper::uploadCompressedImage(
-                file: $request->file('gambar'),
+                file: $request->file('image'),
                 directory: 'images/photoslide',
-                oldFileName: $photoSlide->gambar ?? null,
-                maxWidth: 600,
+                oldFileName: $photoSlide->image ?? null,
+                maxWidth: 1200,
                 quality: 75,
                 prefix: 'slide_'
             );
 
-            $photoSlide->gambar = $imageName;
+            $photoSlide->image = $imageName;
         }
 
         // Menyimpan data gallery ke database
@@ -85,26 +85,26 @@ class PhotoSlideController extends Controller
      */
     public function update(PhotoSlideRequest $request, PhotoSlide $photoSlide)
     {
-        if ($request->hasFile('gambar')) {
-            $imageFile = $request->file('gambar');
+        if ($request->hasFile('image')) {
+            $imageFile = $request->file('image');
 
             $imageName = ImageHelper::uploadCompressedImage(
-                file: $request->file('gambar'),
+                file: $request->file('image'),
                 directory: 'images/photoslide',
-                oldFileName: $photoSlide->gambar ?? null,
-                maxWidth: 600,
+                oldFileName: $photoSlide->image ?? null,
+                maxWidth: 1200,
                 quality: 75,
                 prefix: 'slide_'
             );
 
-            $photoSlide->gambar = $imageName;
+            $photoSlide->image = $imageName;
         }
 
         // Simpan instance photoSlide ke database
-        $photoSlide->fill($request->except(['gambar']));
+        $photoSlide->fill($request->except(['image']));
         $photoSlide->save();
 
-        return responseSuccess();
+        return responseSuccess(true);
     }
 
     /**
@@ -112,8 +112,8 @@ class PhotoSlideController extends Controller
      */
     public function destroy(PhotoSlide $photoSlide)
     {
-        if ($photoSlide->gambar) {
-            $imagePath = base_path('images/photoslide/' . $photoSlide->gambar);
+        if ($photoSlide->image) {
+            $imagePath = base_path('images/photoslide/' . $photoSlide->image);
 
             // Periksa dan hapus file image
             if (file_exists($imagePath)) {

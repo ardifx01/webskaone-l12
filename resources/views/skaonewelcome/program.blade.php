@@ -36,12 +36,15 @@
     </div>
     <!-- End Promo Block -->
 
-    @include('skaonewelcome.kk-akuntansi')
+    {{-- @include('skaonewelcome.kk-akuntansi')
     @include('skaonewelcome.kk-bisnisdigital')
     @include('skaonewelcome.kk-manajemenperkantoran')
     @include('skaonewelcome.kk-rpl')
-    @include('skaonewelcome.kk-tkj')
+    @include('skaonewelcome.kk-tkj') --}}
 
+    @foreach ($kompetensiKeahlians as $kk)
+        @include('skaonewelcome.program-tampil', ['kk' => $kk])
+    @endforeach
 
     <!-- Call to Action -->
     @include('skaonewelcome.call-to-acction')

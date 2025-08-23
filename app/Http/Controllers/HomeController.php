@@ -58,7 +58,7 @@ class HomeController extends Controller
             ->sum('login_count');
 
         // ABSENSI SISWA PKL ================================
-        $nis = auth()->user()->nis;
+        $nis = Auth::user()->nis;
         $totalHadir = AbsensiSiswaPkl::where('nis', $nis)
             ->where('status', 'HADIR')
             ->count();

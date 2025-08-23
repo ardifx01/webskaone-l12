@@ -110,7 +110,7 @@ class LogoJurusanController extends Controller
         $logo_jurusan->fill($request->except(['logo']));
         $logo_jurusan->save();
 
-        return responseSuccess();
+        return responseSuccess(true);
     }
 
     /**

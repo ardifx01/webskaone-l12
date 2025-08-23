@@ -24,7 +24,7 @@ class WelcomeController extends Controller
     public function index()
     {
         // Mengambil data photo slide yang aktif
-        $photoSlides = PhotoSlide::where('is_active', true)->get();
+        //$photoSlides = PhotoSlide::where('is_active', true)->get();
 
         $teamPengembang = TeamPengembang::all();
         $photoJurusan = PhotoJurusan::all();
@@ -284,10 +284,14 @@ class WelcomeController extends Controller
             ->get();
 
 
+        $slides = PhotoSlide::where('active', true)
+            ->orderBy('order')
+            ->get();
+
+
         return view(
             'welcome',
             [
-                'photoSlides' => $photoSlides,
                 'photoJurusan' => $photoJurusan,
                 'teamPengembang' => $teamPengembang,
                 'dataPersonil' => $dataPersonil,
@@ -318,6 +322,8 @@ class WelcomeController extends Controller
                 'activeUsersCount' => $activeUsersCount,
                 'chartData' => $data,
                 'tampilWakasek' => $tampilWakasek,
+
+                'slides' => $slides,
                 /* 'jadwals' => $jadwals, */
             ]
         );

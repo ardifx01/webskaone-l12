@@ -27,18 +27,18 @@ class PhotoSlideDataTable extends DataTable
             ->addColumn('gambar', function ($row) {
 
                 // Tentukan path foto dari database
-                $imagePath = base_path('images/photoslide/' . $row->gambar);
+                $imagePath = base_path('images/photoslide/' . $row->image);
                 $logoPath = '';
 
                 // Cek apakah file foto ada di folder 'images/personil'
-                if ($row->gambar && file_exists($imagePath)) {
-                    $logoPath = asset('images/photoslide/' . $row->gambar);
+                if ($row->image && file_exists($imagePath)) {
+                    $logoPath = asset('images/photoslide/' . $row->image);
                 } else {
                     // Jika file tidak ditemukan, gunakan foto default berdasarkan jenis kelamin
                     $logoPath = asset('build/images/bg-auth.jpg');
                 }
 
-                // Mengembalikan tag img dengan path gambar
+                // Mengembalikan tag img dengan path image
                 return '<img src="' . $logoPath . '" alt="Foto" width="250" />';
             })
             ->addColumn('action', function ($row) {
@@ -88,9 +88,11 @@ class PhotoSlideDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center')->width(50),
             Column::make('gambar'),
-            Column::make('alt_text'),
-            Column::make('interval'),
-            Column::make('is_active'),
+            Column::make('subtitle'),
+            Column::make('title'),
+            Column::make('overlay'),
+            Column::make('order'),
+            Column::make('active'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

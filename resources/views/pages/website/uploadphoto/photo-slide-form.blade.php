@@ -5,22 +5,21 @@
     @endif
     <div class="row">
         <div class="col-md-6">
-            <x-form.input name="gambar" type="file" label="Upload Gambar Slide" onchange="previewImage(event)" />
+            <x-form.input name="image" type="file" label="Upload Gambar Slide" onchange="previewImage(event)" />
             <h5 class="fs-14 mb-3 mt-4">Image Slide</h5>
             <img id="image-preview"
-                src="{{ $data->gambar && file_exists(base_path('images/photoslide/' . $data->gambar)) ? asset('images/photoslide/' . $data->gambar) : asset('build/images/bg-auth.jpg') }}"
+                src="{{ $data->image && file_exists(base_path('images/photoslide/' . $data->image)) ? asset('images/photoslide/' . $data->image) : asset('build/images/bg-auth.jpg') }}"
                 width="350" alt="Photo" />
         </div>
         <div class="col-md-6">
-            <x-form.input name="alt_text" value="{{ $data->alt_text }}" label="Alternatife Text" />
-            <x-form.input id="interval" name="interval" value="{{ $data->interval }}" min="1000"
-                label="Interval (ms)" />
-            <x-form.select name="is_active" id="is_active" :options="['1' => 'Ya', '0' => 'Tidak']"
-                value="{{ old('is_active', $data->is_active) }}" label="Aktifkan Slide" />
-            {{-- <div>
-                <label for="interval">Interval (ms):</label>
-                <input type="number" id="interval" name="interval" value="2000" min="1000" required>
-            </div> --}}
+            <x-form.input name="subtitle" value="{{ $data->subtitle }}" label="Subtitle" />
+            <x-form.input name="title" value="{{ $data->title }}" label="title" />
+            <x-form.input id="overlay" name="overlay" value="{{ $data->overlay }}" label="Overlay"
+                placeholder="g-bg-black-opacity-0_3--after" />
+            <x-form.select name="active" id="active" :options="['1' => 'True', '0' => 'False']" value="{{ old('active', $data->active) }}"
+                label="Aktifkan Slide" />
+            <x-form.input type="number" name="order" value="{{ old('order', $data->order) }}" label="Order Slide"
+                placeholder="contoh: 1" />
         </div>
     </div>
 </x-form.modal>
