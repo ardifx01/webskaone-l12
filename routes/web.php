@@ -3,7 +3,6 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\About\AboutController;
-use App\Http\Controllers\About\RiwayatAplikasiController;
 use App\Http\Controllers\Pengguna\ProfilPenggunaController;
 use App\Http\Controllers\AppSupport\MenuController;
 use App\Http\Controllers\AppSupport\AppFiturController;

@@ -360,4 +360,8 @@ return [
 
     "galery" => "Galery",
     "photo-slide" => "Photo Slide",
+
+    'failed'   => 'Username atau Password Salah.',
+    'password' => 'Password yang Anda masukkan salah.',
+    'throttle' => 'Terlalu banyak percobaan login. Coba lagi dalam :seconds detik.',
 ];
