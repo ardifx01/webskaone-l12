@@ -46,7 +46,7 @@ class PhotoSlideController extends Controller
                 directory: 'images/photoslide',
                 oldFileName: $photoSlide->image ?? null,
                 maxWidth: 1200,
-                quality: 75,
+                quality: 100,
                 prefix: 'slide_'
             );
 
@@ -93,7 +93,7 @@ class PhotoSlideController extends Controller
                 directory: 'images/photoslide',
                 oldFileName: $photoSlide->image ?? null,
                 maxWidth: 1200,
-                quality: 75,
+                quality: 100,
                 prefix: 'slide_'
             );
 
