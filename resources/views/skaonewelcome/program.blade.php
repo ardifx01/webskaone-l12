@@ -7,44 +7,25 @@
 @endsection
 @section('content')
     <!-- Promo Block -->
-    <div class="g-bg-img-hero g-pos-rel" style="background-image: url({{ URL::asset('build/assets/img/bg/bg-img1.png') }});">
-        <div class="container g-pt-25">
-            <div class="row justify-content-lg-between">
-                <div class="col-lg-4 g-pt-50--lg">
-                    <div class="mb-5">
-                        <h1 class="g-font-size-45 mb-4">Program Studi</h1>
-                        <p> Kompetensi Keahlian di SMKN 1 Kadipaten </p>
-                    </div>
-                </div>
-                <div class="col-lg-8 align-self-end">
-                    <div class="u-shadow-v40 g-brd-around g-brd-7 g-brd-secondary rounded">
-                        <img class="img-fluid rounded" src="{{ URL::asset('images/sakola/kkti.jpg') }}"
-                            alt="Image Description">
-                    </div>
+    <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_3--after"
+        style="background-image: url({{ URL::asset('images/sakola/kk.jpg') }});">
+        <div class="container g-pos-rel g-z-index-1 g-pt-50 g-pb-20">
+            <div class="row justify-content-lg-between align-items-md-center">
+                <div class="col-md-6 col-lg-6 g-mb-80">
+                    <h1 class="g-color-white g-font-size-35--md">The choice of specialization programs that offers hope
+                        to acquire the necessary skills.</h1>
                 </div>
             </div>
         </div>
-
-        <!-- SVG Bottom Background Shape -->
-        <svg class="g-pos-abs g-bottom-0" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1921 183.5"
-            enable-background="new 0 0 1921 183.5" xml:space="preserve">
-            <path fill="#FFFFFF" d="M0,183.5v-142c0,0,507,171,1171,58c0,0,497-93,750,84H0z" />
-            <path opacity="0.2" fill="#FFFFFF" d="M0,183V0c0,0,507,220.4,1171,74.7c0,0,497-119.9,750,108.3H0z" />
-        </svg>
-        <!-- End SVG Bottom Background Shape -->
     </div>
     <!-- End Promo Block -->
-
-    {{-- @include('skaonewelcome.kk-akuntansi')
-    @include('skaonewelcome.kk-bisnisdigital')
-    @include('skaonewelcome.kk-manajemenperkantoran')
-    @include('skaonewelcome.kk-rpl')
-    @include('skaonewelcome.kk-tkj') --}}
-
-    @foreach ($kompetensiKeahlians as $kk)
-        @include('skaonewelcome.program-tampil', ['kk' => $kk])
-    @endforeach
+    <!-- Program -->
+    <section class="container g-py-75">
+        @foreach ($kompetensiKeahlians as $kk)
+            @include('skaonewelcome.program-tampil', ['kk' => $kk])
+        @endforeach
+    </section>
+    <!-- End Program -->
 
     <!-- Call to Action -->
     @include('skaonewelcome.call-to-acction')

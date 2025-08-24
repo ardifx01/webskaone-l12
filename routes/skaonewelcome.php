@@ -19,7 +19,10 @@ Route::group(['prefix' => 'skaone', 'as' => 'skaone.'], function () {
     Route::get('/artikel_guru_hebat', [SkaOneWelcomeController::class, 'artikel_guru_hebat'])->name('artikel_guru_hebat');
     Route::get('/program', [SkaOneWelcomeController::class, 'program'])->name('program');
     Route::get('/future_students', [SkaOneWelcomeController::class, 'future_students'])->name('future_students');
+
     Route::get('/current_students', [SkaOneWelcomeController::class, 'current_students'])->name('current_students');
+    Route::get('/current_students/data/{tahun}', [SkaOneWelcomeController::class, 'getDataByTahun'])->name('current_students.data');
+
     Route::get('/faculty_and_staff', [SkaOneWelcomeController::class, 'faculty_and_staff'])->name('faculty_and_staff');
     Route::get('/events', [SkaOneWelcomeController::class, 'events'])->name('events');
     Route::get('/alumni', [SkaOneWelcomeController::class, 'alumni'])->name('alumni');

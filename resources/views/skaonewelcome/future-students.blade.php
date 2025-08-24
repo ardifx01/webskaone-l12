@@ -10,8 +10,9 @@
 @section('content')
     <!-- Promo Block -->
     <section class="clearfix">
-        <div class="js-bg-video" data-hs-bgv-type="youtube" data-hs-bgv-id="FxiskmF16gU" data-hs-bgv-loop="1">
-            <div class="g-bg-cover g-bg-black-opacity-0_6--after g-pos-rel g-z-index-1">
+        <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_1--after"
+            style="background-image: url({{ URL::asset('images/sakola/kk.jpg') }});">
+            <div class="g-bg-cover g-bg-black-opacity-0_2--after g-pos-rel g-z-index-1">
                 <div class="container text-center g-pos-rel g-z-index-1 g-pt-100 g-pb-80">
                     <!-- Promo Block Info -->
                     <div class="g-mb-40">
@@ -20,30 +21,6 @@
                             your fit at Unify.</p>
                     </div>
                     <!-- End Promo Block Info -->
-
-                    <!-- Form Group -->
-                    <form class="g-max-width-645 mx-auto">
-                        <input class="form-control g-brd-none g-font-size-16 g-rounded-30 g-px-30 g-py-14 g-mb-20"
-                            type="text" placeholder="Search programs by major">
-
-                        <div class="row g-mx-minus-10">
-                            <div class="col-sm-6 g-px-10 g-mb-20">
-                                <button
-                                    class="btn btn-block g-color-white g-color-main--hover g-bg-main g-bg-white--hover g-rounded-30 g-py-13"
-                                    type="submit">
-                                    Search Undergraduate Programs
-                                </button>
-                            </div>
-                            <div class="col-sm-6 g-px-10 g-mb-20">
-                                <button
-                                    class="btn btn-block g-color-white g-color-main--hover g-bg-primary g-bg-white--hover g-rounded-30 g-py-13"
-                                    type="submit">
-                                    Search Graduate Programs
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- End Form Group -->
                 </div>
             </div>
         </div>

@@ -214,17 +214,16 @@
     </div> --}}
     <!-- End Call to Action -->
     <!-- Team -->
-    <div class="container g-py-100">
+    <div class="container g-py-50">
         <!-- Heading -->
-        <div class="g-max-width-550 text-center mx-auto g-mb-100">
+        <div class="g-max-width-550 text-center mx-auto g-mb-50">
             <h2 class="text-uppercase g-color-main-light-v1 g-font-weight-600 g-font-size-13 g-letter-spacing-2 mb-4">Who
-                is
-                the deputy leader?</h2>
+                is the deputy leader?</h2>
             <h2 class="h3">This is the deputy principal who helps the principal's performance</h2>
         </div>
         <!-- End Heading -->
 
-        <div class="row g-mx-minus-25 g-mb-40">
+        <div class="row g-mx-minus-25 g-mb-20">
             @foreach ($tampilWakasek as $wakasek)
                 <div class="col-12 col-md-6 g-px-25 g-mb-50">
                     <!-- Team -->
@@ -245,9 +244,11 @@
         </div>
     </div>
     <!-- End Team -->
-    <hr class="g-brd-gray-light-v4 g-my-60">
+
+    <hr class="g-brd-gray-light-v4 g-my-30">
+
     <!-- Learn First Steps -->
-    <div class="container g-pt-100 g-pb-50">
+    <div class="container g-pt-30 g-pb-50">
 
         {{-- <hr class="g-brd-secondary-light-v1 g-my-50"> --}}
 

@@ -10,12 +10,12 @@
         <div class="container g-pt-25">
             <div class="row justify-content-lg-between">
                 <div class="col-lg-4">
-                    <div class="mb-5">
-                        <h1 class="g-font-size-35 mb-4">Visi SMKN 1 Kadipaten</h1>
-                        <h1 class="g-color-black mb-3 g-font-size-24">Pencetak lulusan yang kompeten dan berintegritas
-                            terbaik di Jawa Barat
-                            pada tahun
-                            2029</h1>
+                    <div class="g-pt-80 g-pb-30">
+                        <h1 class="g-font-size-35">Visi SMKN 1 Kadipaten</h1>
+                        <h1 class="g-color-black g-font-size-24 g-pt-10">
+                            Pencetak lulusan yang kompeten dan berintegritas
+                            terbaik di Jawa Barat pada tahun 2029
+                        </h1>
                     </div>
                 </div>
                 <div class="col-lg-8 align-self-end">

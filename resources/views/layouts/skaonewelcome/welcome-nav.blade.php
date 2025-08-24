@@ -33,13 +33,13 @@
                 href="/skaone/future_students">
                 Future Students
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-px-15--lg g-py-10 g-py-30--lg"
                 href="/skaone/current_students">
                 Current Students
             </a>
-        </li> --}}
+        </li>
         <li class="nav-item">
             <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-px-15--lg g-py-10 g-py-30--lg"
                 href="/skaone/faculty_and_staff">

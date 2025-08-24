@@ -78,31 +78,6 @@ class SkaOneWelcomeController extends Controller
             ];
         }
 
-
-        /* $personilData = PhotoPersonil::select(
-            'photo_personils.id',
-            'photo_personils.no_group',
-            'photo_personils.nama_group',
-            'photo_personils.no_personil',
-            'photo_personils.id_personil',
-            'photo_personils.photo',
-            'personil_sekolahs.gelardepan',
-            'personil_sekolahs.namalengkap',
-            'personil_sekolahs.gelarbelakang'
-        )
-            ->join('personil_sekolahs', 'personil_sekolahs.id_personil', '=', 'photo_personils.id_personil')
-            ->whereIn('photo_personils.nama_group', ['Akuntansi', 'Bisnis Digital', 'Manajemen Perkantoran', 'Rekayasa Perangkat Lunak', 'Teknik Komputer dan Jaringan'])
-            ->orderByRaw('CAST(photo_personils.no_personil AS UNSIGNED)')
-            ->get();
-
-        $groupedData = $personilData->groupBy('nama_group');
-
-        $personilAkuntansi = $groupedData->get('Akuntansi', collect());
-        $personilBisnisDigital = $groupedData->get('Bisnis Digital', collect());
-        $personilMPerkantoran = $groupedData->get('Manajemen Perkantoran', collect());
-        $personilRPL = $groupedData->get('Rekayasa Perangkat Lunak', collect());
-        $personilTKJ = $groupedData->get('Teknik Komputer dan Jaringan', collect()); */
-
         $personilData = PhotoPersonil::select(
             'photo_personils.id',
             'photo_personils.no_group',
@@ -128,7 +103,6 @@ class SkaOneWelcomeController extends Controller
             ->get();
 
         $personil = $personilData->groupBy('idkk');
-
 
         //tampilkan kaprodi masing-masing konsentrasi keahlian
         $tampilKaprodi = KetuaProgramStudi::select(
@@ -159,7 +133,6 @@ class SkaOneWelcomeController extends Controller
 
         $kompetensiKeahlians = KompetensiKeahlian::orderBy('idkk')->get();
 
-
         return view(
             'skaonewelcome.program',
             [
@@ -169,11 +142,6 @@ class SkaOneWelcomeController extends Controller
 
                 'jumlahSiswaPerKK' => $jumlahSiswaPerKK,
                 'totalSiswaPerKK' => $totalSiswaPerKK,
-                /* 'personilAkuntansi' => $personilAkuntansi,
-                'personilBisnisDigital' => $personilBisnisDigital,
-                'personilMPerkantoran' => $personilMPerkantoran,
-                'personilRPL' => $personilRPL,
-                'personilTKJ' => $personilTKJ, */
                 'tampilKaprodi' => $tampilKaprodi,
                 'dataProfil' => $dataProfil,
                 'personil' => $personil,
@@ -190,8 +158,66 @@ class SkaOneWelcomeController extends Controller
 
     public function current_students()
     {
-        return view('skaonewelcome.current-students');
+        // Daftar tahun ajaran unik
+        $tahunAjaran = PesertaDidikRombel::select('tahun_ajaran')
+            ->distinct()
+            ->orderBy('tahun_ajaran', 'desc')
+            ->pluck('tahun_ajaran');
+
+        // Data awal (ambil tahun terbaru)
+        $tahunDefault = $tahunAjaran->first();
+
+        $dataSiswa = $this->getDataSiswaByTahun($tahunDefault);
+
+        return view(
+            'skaonewelcome.current-students',
+            [
+                'dataSiswa' => $dataSiswa,
+                'tahunAjaran' => $tahunAjaran,
+                'tahunDefault' => $tahunDefault,
+                'tahunAktif'  => $tahunDefault, // tambahin ini
+            ]
+        );
     }
+
+    public function getDataByTahun($tahun)
+    {
+        $dataSiswa = $this->getDataSiswaByTahun($tahun);
+
+        // return partial blade agar langsung bisa dipasang di <tbody>
+        return view('skaonewelcome.current-students-table-siswa', compact('dataSiswa'))->render();
+    }
+
+    private function getDataSiswaByTahun($tahun)
+    {
+        return PesertaDidikRombel::select(
+            'peserta_didik_rombels.tahun_ajaran',
+            'peserta_didik_rombels.kode_kk',
+            'kompetensi_keahlians.nama_kk',
+            'kompetensi_keahlians.singkatan',
+            'peserta_didik_rombels.rombel_tingkat',
+            DB::raw('COUNT(DISTINCT peserta_didik_rombels.nis) as jumlah_siswa'),
+            DB::raw('COUNT(DISTINCT peserta_didik_rombels.rombel_kode) as jumlah_rombel')
+        )
+            ->join(
+                'kompetensi_keahlians',
+                'peserta_didik_rombels.kode_kk',
+                '=',
+                'kompetensi_keahlians.idkk'
+            )
+            ->where('peserta_didik_rombels.tahun_ajaran', $tahun)
+            ->groupBy(
+                'peserta_didik_rombels.tahun_ajaran',
+                'peserta_didik_rombels.kode_kk',
+                'kompetensi_keahlians.nama_kk',
+                'kompetensi_keahlians.singkatan',
+                'peserta_didik_rombels.rombel_tingkat'
+            )
+            ->orderBy('peserta_didik_rombels.kode_kk')
+            ->orderBy('peserta_didik_rombels.rombel_tingkat')
+            ->get();
+    }
+
 
     public function faculty_and_staff()
     {

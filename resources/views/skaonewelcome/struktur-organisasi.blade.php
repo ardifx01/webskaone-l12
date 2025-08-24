@@ -88,9 +88,9 @@
         <div class="container g-pt-25">
             <div class="row justify-content-lg-between">
                 <div class="col-lg-4">
-                    <div class="mb-5">
-                        <h1 class="g-font-size-35 mb-4">Struktur Organisasi</h1>
-                        <h1 class="g-color-black mb-3 g-font-size-24">SMKN 1 Kadipaten</h1>
+                    <div class="g-pt-80 g-pb-30">
+                        <h1 class="g-font-size-35">Struktur Organisasi</h1>
+                        <h1 class="g-color-black g-font-size-24">SMKN 1 Kadipaten</h1>
                     </div>
                 </div>
                 <div class="col-lg-8 align-self-end">

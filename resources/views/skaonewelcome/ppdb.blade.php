@@ -10,8 +10,9 @@
 
     <!-- Promo Block -->
     <section class="clearfix">
-        <div class="js-bg-video" data-hs-bgv-type="youtube" data-hs-bgv-id="FxiskmF16gU" data-hs-bgv-loop="1">
-            <div class="g-bg-cover g-bg-black-opacity-0_6--after g-pos-rel g-z-index-1">
+        <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_1--after"
+            style="background-image: url({{ URL::asset('images/sakola/kk.jpg') }});">
+            <div class="g-bg-cover g-bg-black-opacity-0_2--after g-pos-rel g-z-index-1">
                 <div class="container text-center g-pos-rel g-z-index-1 g-pt-100 g-pb-80">
                     <!-- Promo Block Info -->
                     <div class="g-mb-40">
