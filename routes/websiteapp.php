@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Alumni\RiwayatKerjaController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\WebSite\EventController;
 use App\Http\Controllers\WebSite\DailyMessagesController;
 use App\Http\Controllers\WebSite\FiturCodingController;
 use App\Http\Controllers\WebSite\GaleryController;
@@ -42,8 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('kumpulan-faqs', KumpulanFaqController::class);
         Route::resource('daily-messages', DailyMessagesController::class);
 
-        Route::resource('events', EventController::class);
         Route::get('events/list', [EventController::class, 'listEvent'])->name('events.list');
+        Route::resource('events', EventController::class);
 
         Route::resource('polling', PollingController::class);
         Route::resource('question', QuestionController::class);
