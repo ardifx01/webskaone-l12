@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeController; //dashboard
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\About\AboutController;
 use App\Http\Controllers\Pengguna\ProfilPenggunaController;
@@ -44,10 +44,12 @@ Route::get('/db-error', function () {
     return view('error.auth-500');
 })->name('db.error');
 
+// penanganan error 404 jika tidak ditemukan
 Route::fallback(function () {
     return response()->view('error.auth-404-basic', [], 404);
 });
 
+// sedang perbaikan
 Route::get('/sedang-perbaikan', function () {
     return view('error.sedang-perbaikan');
 })->name('sedangperbaikan');
@@ -55,6 +57,7 @@ Route::get('/sedang-perbaikan', function () {
 
 //pertama kali masuk
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
 
 // masuk halaman dashboard
 Route::get('/dashboard', [HomeController::class, 'index'])
@@ -101,8 +104,6 @@ Route::middleware(['auth', 'adminOrMaster'])->post('/switch-account', [UserContr
 Route::middleware(['auth'])->get('/return-account', [UserController::class, 'returnToOriginalAccount'])->name('return.account');
 
 // ABOUT
-/* Route::resource('about', AboutController::class);
-Route::get('riwayat-aplikasi', [RiwayatAplikasiController::class, 'index'])->name('riwayat-aplikasi.index'); */
 Route::get('about', [AboutController::class, 'index'])->name('about.index');
 
 // MELAKUKAN POLLING SUBMIT
@@ -119,65 +120,14 @@ Route::middleware('auth')->group(function () {
         Session::put('lang', $lang);
         return redirect()->back();
     })->name('lang.switch');
-
-    // PROFIL PENGGUNA
-    Route::group(['prefix' => 'profilpengguna', 'as' => 'profilpengguna.'], function () {
-        Route::resource('profil-pengguna', ProfilPenggunaController::class)->middleware(['check.default.password']);
-        Route::post('/simpanphotoprofil', [ProfilPenggunaController::class, 'updateProfilePicture'])->name('simpanphotoprofil');
-        Route::post('/simpanphotobackground', [ProfilPenggunaController::class, 'updateBackground'])->name('simpanphotobackground');
-
-        Route::post('/simpanphotoprofilsiswa', [ProfilPenggunaController::class, 'updateProfilePictureSiswa'])->name('simpanphotoprofilsiswa');
-        Route::put('/simpanorangtuasiswa', [ProfilPenggunaController::class, 'updateOrtuSiswa'])->name('simpanorangtuasiswa');
-
-        Route::resource('password-pengguna', GantiPasswordController::class);
-        Route::post('password-pengguna', [GantiPasswordController::class, 'updatePassword'])->name('update-password');
-        Route::resource('pesan-pengguna', PesanController::class);
-        Route::get('/chats/{id}', [PesanController::class, 'getChatMessages']);
-    });
-
-    // MANAJEMEN PENGGUNA
-    Route::group(['prefix' => 'manajemenpengguna', 'as' => 'manajemenpengguna.'], function () {
-        Route::resource('roles', RoleController::class);
-        Route::resource('permissions', PermissionController::class);
-
-        Route::get('akses-role/{role}/role', [AksesRoleController::class, 'getPermissionsByRole']);
-        Route::resource('akses-role', AksesRoleController::class)->except(['create', 'store', 'delete'])->parameters(['akses-role' => 'role']);
-
-        Route::get('akses-user/{user}/user', [AksesUserController::class, 'getPermissionsByUser']);
-        Route::resource('akses-user', AksesUserController::class)->except(['create', 'store', 'delete'])->parameters(['akses-user' => 'user']);
-
-        Route::resource('users', UserController::class);
-        Route::post('/users/{user}/add-role', [UserController::class, 'addRole'])->name('users.addRole');
-        Route::post('/users/reset-password/{id}', [UserController::class, 'directResetPassword'])->name('users.directResetPassword');
-        Route::delete('/hapus-role-massal', [UserController::class, 'hapusRoleMassalAjax'])->name('hapus.role.ajax');
-        Route::post('/generate-permission', [PermissionController::class, 'generatePermission'])->name('generatepermission');
-        Route::post('/assign-role', [UserController::class, 'assignRole'])->name('assignRole');
-    });
-
-    // APP SUPPORT
-    Route::group(['prefix' => 'appsupport', 'as' => 'appsupport.'], function () {
-        Route::put('menu/sort', [MenuController::class, 'sort'])->name('menu.sort');
-        Route::resource('menu', MenuController::class);
-
-        Route::resource('app-fiturs', AppFiturController::class);
-        Route::put('app-fiturs/{id}/simpan-status', [AppFiturController::class, 'simpanStatus'])->name('app-fiturs.simpan-status');
-
-        Route::resource('app-profil', AppProfilController::class);
-        Route::resource('referensi', ReferensiController::class);
-
-        Route::resource('backup-db', BackupDbController::class);
-        Route::post('/backup-db/process', [BackupDbController::class, 'backupSelectedTables'])->name('backup-db.process');
-        Route::delete('/backup-db/delete/{fileName}', [BackupDbController::class, 'deleteBackupFile'])->name('backup-db.delete');
-
-        Route::resource('impor-data-master', ImporDataMasterController::class);
-        Route::resource('ekspor-data-master', EksporDataMasterController::class);
-        Route::resource('data-login', DataLoginController::class);
-    });
 });
 
 
 // Rute otentikasi yang dihasilkan oleh Laravel Breeze
 require __DIR__ . '/auth.php';
+require __DIR__ . '/manajemenpengguna.php';
+require __DIR__ . '/pengguna.php';
+require __DIR__ . '/appsupport.php';
 require __DIR__ . '/template.php';
 require __DIR__ . '/manajemensekolah.php';
 require __DIR__ . '/kurikulum.php';
