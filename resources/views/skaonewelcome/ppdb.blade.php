@@ -1,17 +1,16 @@
 @extends('layouts.skaonewelcome.welcome-master')
 @section('title')
-    PPDB
+    Team LCKS
 @endsection
 @section('css')
-    {{--  --}}
+    <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/slick-carousel/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/hs-bg-video/hs-bg-video.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/fancybox/jquery.fancybox.css') }}">
 @endsection
 @section('content')
-    {{--  --}}
-
-    <!-- Promo Block -->
     <section class="clearfix">
         <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_1--after"
-            style="background-image: url({{ URL::asset('images/sakola/kk.jpg') }});">
+            style="background-image: url({{ URL::asset('images/sakola/back.jpg') }});">
             <div class="g-bg-cover g-bg-black-opacity-0_2--after g-pos-rel g-z-index-1">
                 <div class="container text-center g-pos-rel g-z-index-1 g-pt-100 g-pb-80">
                     <!-- Promo Block Info -->
@@ -33,10 +32,8 @@
             </div>
         </div>
     </section>
-    <!-- End Promo Block -->
-    <!-- Find a Course -->
-    <div id="content" class="u-shadow-v34 g-bg-main g-pos-rel g-z-index-1 g-pt-40 g-pb-10">
-        <div class="container g-mb-60">
+    <div id="content" class="u-shadow-v34 g-bg-main g-pos-rel g-z-index-1 g-pt-20 g-pb-10">
+        <div class="container g-mb-40">
             <nav class="text-center " aria-label="Page Navigation">
                 <ul class="list-inline">
                     <li class="list-inline-item float-sm-left">
@@ -46,9 +43,9 @@
                         {{--  --}}
                     </li>
                     <li class="list-inline-item float-sm-right">
-                        <div class="">
+                        <div class="g-pt-5">
                             <a href="{{ url('/skaone/program') }}"
-                                class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-35 g-py-13">Isi
+                                class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-55 g-py-8">Isi
                                 Form</a>
                         </div>
                     </li>
@@ -56,8 +53,7 @@
             </nav>
         </div>
     </div>
-    <!-- End Find a Course -->
-    <!-- Promo Block -->
+    <!-- Studies -->
     <div class="g-bg-img-hero" style="background-image: url({{ URL::asset('build/assets/include/svg/svg-bg1.svg') }});">
         <div class="container g-py-100 g-py-150--lg">
             <div class="row align-items-lg-center">
@@ -122,8 +118,8 @@
                                 points="14.8,47.3 0.1,25.5 11.8,1.9 38,0.1 52.7,22 41,45.6 " />
                             <polyline fill="#FFFFFF" stroke="#7cd1d8" stroke-width="0.25" stroke-miterlimit="10"
                                 points="37.9,0.1 26.5,23.8 0.2,25.5 " />
-                            <line fill="#FFFFFF" stroke="#7cd1d8" stroke-width="0.25" stroke-miterlimit="10" x1="41"
-                                y1="45.4" x2="26.4" y2="23.7" />
+                            <line fill="#FFFFFF" stroke="#7cd1d8" stroke-width="0.25" stroke-miterlimit="10"
+                                x1="41" y1="45.4" x2="26.4" y2="23.7" />
                         </svg>
                         <!-- End SVG Square #3 -->
 
@@ -143,13 +139,32 @@
             </div>
         </div>
     </div>
-    <!-- End Promo Block -->
 
     <!-- Call to Action -->
     @include('skaonewelcome.call-to-acction')
     <!-- End Call to Action -->
 @endsection
 @section('script')
+    <!-- JS Implementing Plugins -->
+    <script src="{{ URL::asset('build/assets/vendor/hs-megamenu/src/hs.megamenu.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/vendor/slick-carousel/slick/slick.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/vendor/hs-bg-video/hs-bg-video.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/vendor/hs-bg-video/vendor/player.min.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/vendor/fancybox/jquery.fancybox.min.js') }}"></script>
+
+    <!-- JS Unify -->
+    <script src="{{ URL::asset('build/assets/js/hs.core.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.header.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/helpers/hs.hamburgers.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.dropdown.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.carousel.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/helpers/hs.bg-video.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.popup.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.go-to.js') }}"></script>
+
+    <!-- JS Customization -->
+    <script src="{{ URL::asset('build/assets/js/custom.js') }}"></script>
+
     <!-- JS Plugins Init. -->
     <script>
         $(document).on('ready', function() {
@@ -171,13 +186,14 @@
                 }
             });
 
-            // initialization of custom select
-            $.HSCore.components.HSSelect.init('.js-custom-select');
+            // initialization of carousel
+            $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
 
-            // initialization of sticky blocks
-            setTimeout(function() {
-                $.HSCore.components.HSStickyBlock.init('.js-sticky-block');
-            }, 300);
+            // initialization of video on background
+            $.HSCore.helpers.HSBgVideo.init('.js-bg-video');
+
+            // initialization of popups
+            $.HSCore.components.HSPopup.init('.js-fancybox');
 
             // initialization of go to
             $.HSCore.components.HSGoTo.init('.js-go-to');

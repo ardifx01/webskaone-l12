@@ -9,6 +9,7 @@ use App\Models\ManajemenSekolah\PersonilSekolah;
 use App\Models\ManajemenSekolah\Semester;
 use App\Models\ManajemenSekolah\TahunAjaran;
 use App\Models\WebSite\PhotoPersonil;
+use App\Models\WebSite\TeamPengembang;
 use App\Models\WelcomeDataPersonil;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +24,13 @@ class SkaOneWelcomeController extends Controller
 
     public function team()
     {
-        return view('skaonewelcome.team');
+        $teamPengembang = TeamPengembang::all(); // Fetch all team members
+        return view(
+            'skaonewelcome.team',
+            [
+                'teamPengembang' => $teamPengembang,
+            ]
+        );
     }
 
     public function program()

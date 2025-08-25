@@ -8,14 +8,14 @@
 @section('content')
     <!-- Promo Block -->
     <section class="clearfix">
-        <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_1--after"
-            style="background-image: url({{ URL::asset('images/sakola/kk.jpg') }});">
-            <div class="g-bg-cover g-bg-black-opacity-0_2--after g-pos-rel g-z-index-1">
-                <div class="container text-center g-pos-rel g-z-index-1 g-pt-100 g-pb-80">
+        <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_4--after"
+            style="background-image: url({{ URL::asset('images/sakola/misisekolah2.jpg') }});">
+            <div class="g-bg-cover g-bg-black-opacity-0_1--after g-pos-rel g-z-index-1">
+                <div class="container text-center g-pos-rel g-z-index-1 g-pt-100 g-pb-25">
                     <!-- Promo Block Info -->
-                    <div class="g-mb-40">
-                        <h1 class="g-color-white g-font-size-60--lg">Become a SMKN 1 Kadipaten Student</h1>
-                        <p class="g-color-white-opacity-0_8 g-font-size-22">The condition of the students is more than 1,700
+                    <div class="g-mb-30">
+                        <h1 class="g-color-white g-font-size-30--md">SMKN 1 Kadipaten Student</h1>
+                        <p class="g-color-white-opacity-0_8 g-font-size-14">The condition of the students is more than 1,700+
                             people.</p>
                     </div>
                     <!-- End Promo Block Info -->

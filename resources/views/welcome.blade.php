@@ -28,7 +28,7 @@
 
                             {{-- Title utama --}}
                             <span
-                                class="d-block g-color-white g-font-secondary g-font-size-25 g-font-size-45--md g-line-height-1_4">
+                                class="d-block g-color-white g-font-secondary g-font-size-25 g-font-size-35--md g-line-height-1_4">
                                 {{ $slide['title'] }}
                             </span>
                         </a>
@@ -47,8 +47,8 @@
     </div>
 
     <!-- Find a Course -->
-    <div id="content" class="u-shadow-v34 g-bg-main g-pos-rel g-z-index-1 g-pt-40 g-pb-10">
-        <div class="container g-mb-60">
+    <div id="content" class="u-shadow-v34 g-bg-main g-pos-rel g-z-index-1 g-pt-15 g-pb-5">
+        <div class="container g-mb-30">
             <nav class="text-center " aria-label="Page Navigation">
                 <ul class="list-inline">
                     <li class="list-inline-item float-sm-left">
@@ -62,15 +62,11 @@
                             <div class="">
                                 @auth
                                     <a href="{{ url('/dashboard') }}"
-                                        class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-35 g-py-13">Dashboard</a>
+                                        class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-55 g-py-8">Dashboard</a>
                                 @else
                                     <a href="{{ route('auth', 'login') }}"
-                                        class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-35 g-py-13">Log
+                                        class="btn u-shadow-v32 g-brd-none g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-font-size-16 g-rounded-30 g-transition-0_2 g-px-55 g-py-8">Log
                                         in</a>
-
-                                    {{-- @if (Route::has('register'))
-                                    <a href="{{ route('auth', 'register') }}" class="btn btn-primary">Register</a>
-                                @endif --}}
                                 @endauth
                             </div>
                         @endif

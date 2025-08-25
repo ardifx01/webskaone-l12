@@ -7,13 +7,15 @@
 @endsection
 @section('content')
     <!-- Promo Block -->
-    <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_3--after"
+    <div class="g-bg-img-hero g-bg-cover g-bg-black-opacity-0_1--after"
         style="background-image: url({{ URL::asset('images/sakola/kk.jpg') }});">
-        <div class="container g-pos-rel g-z-index-1 g-pt-50 g-pb-20">
-            <div class="row justify-content-lg-between align-items-md-center">
-                <div class="col-md-6 col-lg-6 g-mb-80">
-                    <h1 class="g-color-white g-font-size-35--md">The choice of specialization programs that offers hope
-                        to acquire the necessary skills.</h1>
+        <div class="g-bg-cover g-bg-black-opacity-0_1--after g-pos-rel g-z-index-1">
+            <div class="container g-pos-rel g-z-index-1 g-pt-50 g-pb-20">
+                <div class="row justify-content-lg-between align-items-md-center">
+                    <div class="col-md-6 col-lg-6 g-mb-30">
+                        <h1 class="g-color-white g-font-size-35--md">The choice of specialization programs that offers hope
+                            to acquire the necessary skills.</h1>
+                    </div>
                 </div>
             </div>
         </div>

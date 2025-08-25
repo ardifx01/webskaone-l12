@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="g-bg-secondary g-pt-100 g-pb-50">
+<footer class="g-bg-secondary g-pt-25 g-pb-15">
     <div class="container">
         {{-- <div class="row g-mb-40">
             <div class="col-6 col-md-3 g-mb-20">
