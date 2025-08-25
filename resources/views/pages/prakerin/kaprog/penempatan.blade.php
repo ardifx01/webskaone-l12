@@ -108,8 +108,8 @@
                 if (result.isConfirmed) {
                     // Send AJAX request to delete the student
                     $.ajax({
-                        url: '{{ route('kaprogprakerin.penempatan.destroy', '') }}/' +
-                            id, // Adjust the URL
+                        url: '{{ route('kaprogprakerin.penempatan.destroy', ['penempatan' => ':id']) }}'
+                            .replace(':id', id),
                         type: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}' // Include CSRF token

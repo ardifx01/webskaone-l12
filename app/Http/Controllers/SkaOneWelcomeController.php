@@ -21,6 +21,11 @@ class SkaOneWelcomeController extends Controller
         return view('skaonewelcome.artikel-guru-hebat');
     }
 
+    public function team()
+    {
+        return view('skaonewelcome.team');
+    }
+
     public function program()
     {
         // Cari tahun ajaran aktif

@@ -45,20 +45,20 @@ class PrakerinPenempatanController extends Controller
         $kompetensiKeahlianOptions = KompetensiKeahlian::pluck('nama_kk', 'idkk')->toArray();
         $selectedKompetensiKeahlianId = null;
 
-        if (auth()->check()) {
-            $user = User::find(Auth::user()->id);
+        if (Auth::check()) {
+            $map = [
+                'kaprakerinak' => '833',
+                'kaprakerinbd' => '811',
+                'kaprakerinmp' => '821',
+                'kaprakerinrpl' => '411',
+                'kaprakerintkj' => '421',
+            ];
 
-            // Set selected kompetensi keahlian based on user role
-            if ($user->hasAnyRole(['kaprakerinak'])) {
-                $selectedKompetensiKeahlianId = '833';
-            } elseif ($user->hasAnyRole(['kaprakerinbd'])) {
-                $selectedKompetensiKeahlianId = '811';
-            } elseif ($user->hasAnyRole(['kaprakerinmp'])) {
-                $selectedKompetensiKeahlianId = '821';
-            } elseif ($user->hasAnyRole(['kaprakerinrpl'])) {
-                $selectedKompetensiKeahlianId = '411';
-            } elseif ($user->hasAnyRole(['kaprakerintkj'])) {
-                $selectedKompetensiKeahlianId = '421';
+            foreach ($map as $role => $id) {
+                if (Auth::user()->hasAnyRole([$role])) {
+                    $selectedKompetensiKeahlianId = $id;
+                    break;
+                }
             }
         }
 
