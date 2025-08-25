@@ -38,7 +38,8 @@
                     <a class="js-go-to d-flex align-items-center g-color-white g-pos-abs g-bottom-0 g-z-index-1 g-text-underline--none--hover g-pb-60"
                         href="#!" data-target="#content">
                         <span class="d-block u-go-to-v4 mr-3"></span>
-                        <span class="g-brd-bottom--dashed g-brd-white-opacity-0_5 mr-1">scroll down</span> to find out more
+                        <span class="g-brd-bottom--dashed g-brd-white-opacity-0_5 mr-1">press left arrow</span> to find
+                        out more
                     </a>
                     <!-- End Go to Button -->
                 </div>
