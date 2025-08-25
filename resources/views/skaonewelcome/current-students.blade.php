@@ -14,7 +14,7 @@
                 <div class="container text-center g-pos-rel g-z-index-1 g-pt-100 g-pb-25">
                     <!-- Promo Block Info -->
                     <div class="g-mb-30">
-                        <h1 class="g-color-white g-font-size-30--md">SMKN 1 Kadipaten Student</h1>
+                        <h1 class="g-color-white g-font-size-30--md">Outstanding Students</h1>
                         <p class="g-color-white-opacity-0_8 g-font-size-14">The condition of the students is more than 1,700+
                             people.</p>
                     </div>

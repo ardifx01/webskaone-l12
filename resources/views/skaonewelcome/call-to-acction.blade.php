@@ -8,7 +8,7 @@
         </div>
         <!-- End Heading -->
 
-        <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-35 g-py-13"
+        <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
             href="#!">Apply Now</a>
 
         <!-- SVG Shape -->
@@ -41,7 +41,9 @@
         </svg>
         <!-- End SVG Shape -->
 
-        <a class="btn u-shadow-v32 g-color-primary g-color-white--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13"
+        {{-- <a class="btn u-shadow-v32 g-color-primary g-color-white--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
+            href="#!">Contact Us</a> --}}
+        <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
             href="#!">Contact Us</a>
     </div>
 
