@@ -71,30 +71,34 @@
                         Current Students
                     </a>
                 </li>
+                {{--
                 <li class="nav-item">
                     <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-px-15--lg g-py-10 g-py-30--lg"
                         href="/skaone/ppdb">
                         PPDB
                     </a>
                 </li>
+                 --}}
                 <li class="nav-item">
                     <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-px-15--lg g-py-10 g-py-30--lg"
                         href="/skaone/team">
                         Team
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-            <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-px-15--lg g-py-10 g-py-30--lg"
-                href="/skaone/events">
-                Events
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-pl-15--lg g-pr-0--lg g-py-10 g-py-30--lg"
-                href="/skaone/alumni">
-                Alumni
-            </a>
-        </li> --}}
+                {{--
+                <li class="nav-item">
+                    <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-px-15--lg g-py-10 g-py-30--lg"
+                        href="/skaone/events">
+                        Events
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link g-color-primary--hover g-font-size-15 g-font-size-17--xl g-pl-15--lg g-pr-0--lg g-py-10 g-py-30--lg"
+                        href="/skaone/alumni">
+                        Alumni
+                    </a>
+                </li>
+                --}}
             </ul>
         </div>
     </nav>
