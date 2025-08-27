@@ -3,25 +3,24 @@
     Team LCKS
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/slick-carousel/slick/slick.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/hs-bg-video/hs-bg-video.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/fancybox/jquery.fancybox.css') }}">
+    <!-- CSS Global Icons -->
+    <link rel="stylesheet"
+        href="{{ URL::asset('build/assets/vendor/cubeportfolio-full/cubeportfolio/css/cubeportfolio.min.css') }}">
 @endsection
 @section('content')
     <section class="container g-pt-100 g-pb-70">
         <!-- Heading -->
-        <div class="row justify-content-center text-center g-mb-50">
-            <div class="col-lg-9">
-                <h2 class="h3 g-color-black g-font-weight-600 text-uppercase mb-2">Meet our team</h2>
-                <div class="d-inline-block g-width-35 g-height-2 g-bg-primary mb-2"></div>
-                <p class="lead mb-0">We are creative people focused on the latest developments, <br>straddling the line
-                    between
-                    sophistication and simplicity.</p>
-            </div>
+        <div class="u-heading-v6-2 text-center g-mb-60">
+            <h2 class="h1 u-heading-v6__title g-brd-black g-color-primary g-font-weight-600 text-uppercase mb-0">Meet our
+                team
+            </h2>
+            <p class="lead mb-0">We are creative people focused on the latest developments, <br>straddling the line
+                between
+                sophistication and simplicity.</p>
         </div>
         <!-- End Heading -->
 
-        @include('skaonewelcome.team-style-1', ['teamPengembang' => $teamPengembang])
+        @include('skaonewelcome.team-style-2', ['teamPengembang' => $teamPengembang])
     </section>
 
     <!-- Call to Action -->
@@ -32,19 +31,17 @@
     <!-- JS Implementing Plugins -->
     <script src="{{ URL::asset('build/assets/vendor/hs-megamenu/src/hs.megamenu.js') }}"></script>
     <script src="{{ URL::asset('build/assets/vendor/slick-carousel/slick/slick.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/vendor/hs-bg-video/hs-bg-video.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/vendor/hs-bg-video/vendor/player.min.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/vendor/fancybox/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/vendor/cubeportfolio-full/cubeportfolio/js/jquery.cubeportfolio.min.js') }}">
+    </script>
 
     <!-- JS Unify -->
     <script src="{{ URL::asset('build/assets/js/hs.core.js') }}"></script>
     <script src="{{ URL::asset('build/assets/js/components/hs.header.js') }}"></script>
     <script src="{{ URL::asset('build/assets/js/helpers/hs.hamburgers.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/js/components/hs.dropdown.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/js/components/hs.carousel.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/js/helpers/hs.bg-video.js') }}"></script>
-    <script src="{{ URL::asset('build/assets/js/components/hs.popup.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.tabs.js') }}"></script>
     <script src="{{ URL::asset('build/assets/js/components/hs.go-to.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.carousel.js') }}"></script>
+    <script src="{{ URL::asset('build/assets/js/components/hs.cubeportfolio.js') }}"></script>
 
     <!-- JS Customization -->
     <script src="{{ URL::asset('build/assets/js/custom.js') }}"></script>
@@ -81,6 +78,13 @@
 
             // initialization of go to
             $.HSCore.components.HSGoTo.init('.js-go-to');
+
+            // initialization of cubeportfolio
+            $.HSCore.components.HSCubeportfolio.init('.cbp');
+        });
+        $(window).on('load', function() {
+            // initialization of cubeportfolio
+            $.HSCore.components.HSCubeportfolio.init('.cbp');
         });
     </script>
 @endsection

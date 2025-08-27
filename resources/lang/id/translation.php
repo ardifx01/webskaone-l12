@@ -531,7 +531,7 @@ return [
     "arsip" => "Arsip",
     "materi-ajar" => "Materi Ajar",
 
-    'failed'   => 'Username atau Password Salah.',
+    /* 'failed'   => 'Username atau Password Salah.',
     'password' => 'Password yang Anda masukkan salah.',
-    'throttle' => 'Terlalu banyak percobaan login. Coba lagi dalam :seconds detik.',
+    'throttle' => 'Terlalu banyak percobaan login. Coba lagi dalam :seconds detik.', */
 ];

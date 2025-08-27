@@ -1,6 +1,11 @@
 <!-- Forgot Password -->
 <div id="forgot-password" style="display: none;">
     <div class="u-shadow-v35 g-bg-white rounded g-px-40 g-py-50">
+        <div class="mb-2">
+            <div class="d-inline-block g-width-20 g-height-2 g-pos-rel g-top-minus-4 g-bg-primary mr-2"></div>
+            <span class="g-color-gray-dark-v3 g-font-weight-600 g-font-size-12 text-uppercase">About</span>
+        </div>
+
         <div class="g-mb-20">
             <label class="g-color-text-light-v1 g-font-weight-500">Enter your email</label>
             <div class="input-group">
@@ -9,7 +14,7 @@
                 </span>
                 <input
                     class="form-control g-brd-secondary-light-v2 g-bg-secondary g-bg-secondary-dark-v1--focus g-rounded-left-0 g-px-20 g-py-12"
-                    type="email" placeholder="john@gmail.com">
+                    type="email">
             </div>
         </div>
 

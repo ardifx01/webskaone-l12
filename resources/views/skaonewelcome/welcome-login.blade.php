@@ -14,7 +14,7 @@
                     <div class="col-md-6">
                         <!-- Heading -->
                         <div class="g-mb-40">
-                            <h2 class="h1 mb-3">Sign in to skaone app</h2>
+                            <h2 class="h1 mb-3">Sign in</h2>
                             <p>
                                 By signing in you will be authorized to access your applications and web sites that use
                                 the Sign in Service. Use is subject to but not limited to the policies and guidelines
@@ -33,6 +33,14 @@
                             <!-- Signin -->
                             <div id="signin">
                                 <div class="u-shadow-v35 g-bg-white rounded g-px-40 g-py-50">
+                                    <header class="text-center g-width-100x--md mx-auto g-mb-5">
+                                        <div class="u-heading-v6-2 text-center text-uppercase g-mb-10">
+                                            <h2
+                                                class="h3 u-heading-v6__title g-brd-primary g-color-gray-dark-v2 g-font-weight-600">
+                                                <span class="g-color-primary">Sign In</span>
+                                            </h2>
+                                        </div>
+                                    </header>
                                     <div class="g-mb-20">
                                         <label class="g-color-text-light-v1 g-font-weight-500">Email</label>
                                         <div class="input-group">
