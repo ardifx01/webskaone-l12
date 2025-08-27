@@ -246,6 +246,7 @@ return [
     "password" => "Ganti Password",
     "pesan" => "Kirim dan Baca Pesan",
     'password' => 'Kata Sandi',
+    'kata-sandi' => 'Kata Sandi',
     'current_password' => 'Kata Sandi Saat Ini',
     'new_password' => 'Kata Sandi Baru',
     'confirm_new_password' => 'Konfirmasi Kata Sandi Baru',

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    @lang('translation.password')
+    @lang('translation.kata-sandi')
 @endsection
 @section('css')
     {{--  --}}
@@ -15,7 +15,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header d-flex align-items-center">
-                    <h5 class="mb-0 card-title flex-grow-1">@lang('translation.password')</h5>
+                    <h5 class="mb-0 card-title flex-grow-1">@lang('translation.kata-sandi')</h5>
                 </div>
                 <div class="card-body">
                     @if (session('status'))

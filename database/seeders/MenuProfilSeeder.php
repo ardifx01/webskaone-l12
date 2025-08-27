@@ -69,7 +69,7 @@ class MenuProfilSeeder extends BaseMenuSeeder
             $sm = $mm->subMenus()->create(['name' => 'Profil', 'url' => $mm->url . '/profil-pengguna', 'category' => $mm->category]);
             $this->attachMenupermission($sm, ['read', 'update'], ['kepsek', 'guru', 'tatausaha', 'siswa']);
 
-            $sm = $mm->subMenus()->create(['name' => 'Password', 'url' => $mm->url . '/password-pengguna', 'category' => $mm->category]);
+            $sm = $mm->subMenus()->create(['name' => 'Kata Sandi', 'url' => $mm->url . '/password-pengguna', 'category' => $mm->category]);
             $this->attachMenupermission($sm, ['read', 'update'], ['kepsek', 'guru', 'tatausaha', 'siswa']);
 
             $sm = $mm->subMenus()->create(['name' => 'Pesan', 'url' => $mm->url . '/pesan-pengguna', 'category' => $mm->category]);
