@@ -54,5 +54,4 @@
         </div>
         <!-- End Cube Portfolio Blocks - Item -->
     @endforeach
-
 </div>

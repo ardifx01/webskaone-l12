@@ -221,6 +221,7 @@
             // initialization of go to
             $.HSCore.components.HSGoTo.init('.js-go-to');
 
+
             $.HSCore.components.HSCubeportfolio.init('.cbp');
 
             // initialization of tabs

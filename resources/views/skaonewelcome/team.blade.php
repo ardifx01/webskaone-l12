@@ -70,17 +70,12 @@
             // initialization of carousel
             $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
 
-            // initialization of video on background
-            $.HSCore.helpers.HSBgVideo.init('.js-bg-video');
-
             // initialization of popups
             $.HSCore.components.HSPopup.init('.js-fancybox');
 
             // initialization of go to
             $.HSCore.components.HSGoTo.init('.js-go-to');
 
-            // initialization of cubeportfolio
-            $.HSCore.components.HSCubeportfolio.init('.cbp');
         });
         $(window).on('load', function() {
             // initialization of cubeportfolio
