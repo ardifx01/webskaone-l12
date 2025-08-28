@@ -10,6 +10,7 @@ use App\Models\ManajemenSekolah\Semester;
 use App\Models\ManajemenSekolah\TahunAjaran;
 use App\Models\WaliKelas\Ekstrakurikuler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EkstrakurikulerController extends Controller
@@ -20,7 +21,7 @@ class EkstrakurikulerController extends Controller
     public function index(EkstrakurikulerDataTable $ekstrakurikulerDataTable)
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -146,7 +147,7 @@ class EkstrakurikulerController extends Controller
             ->first();
 
         // Ambil data rombongan belajar berdasarkan wali kelas yang login
-        $rombonganBelajar = RombonganBelajar::where('wali_kelas', auth()->user()->personal_id)
+        $rombonganBelajar = RombonganBelajar::where('wali_kelas', Auth::user()->personal_id)
             ->where('tahunajaran', $tahunAjaranAktif->tahunajaran)
             ->first();
 

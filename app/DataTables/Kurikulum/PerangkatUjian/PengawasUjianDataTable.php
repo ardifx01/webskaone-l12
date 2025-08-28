@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Kurikulum\PerangkatUjian;
 
+use App\Models\Kurikulum\PerangkatUjian\IdentitasUjian;
 use App\Models\Kurikulum\PerangkatUjian\PengawasUjian;
 use App\Traits\DatatableHelper;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -54,7 +55,9 @@ class PengawasUjianDataTable extends DataTable
      */
     public function query(PengawasUjian $model): QueryBuilder
     {
+        $ujianAktif = IdentitasUjian::where('status', 'aktif')->first();
         return $model->newQuery()
+            ->where('kode_ujian', $ujianAktif->kode_ujian)
             ->orderByRaw('CAST(nomor_ruang AS UNSIGNED) ASC')
             ->orderBy('jam_ke')
             ->orderBy('tanggal_ujian');

@@ -24,7 +24,7 @@ class IdentitasSiswaController extends Controller
     public function index(WaliKelasDtSiswaDataTable $waliKelasDtSiswaDataTable)
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')

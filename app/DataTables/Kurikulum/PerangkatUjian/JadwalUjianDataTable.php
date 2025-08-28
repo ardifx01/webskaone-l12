@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Kurikulum\PerangkatUjian;
 
+use App\Models\Kurikulum\PerangkatUjian\IdentitasUjian;
 use App\Models\Kurikulum\PerangkatUjian\JadwalUjian;
 use App\Traits\DatatableHelper;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -51,7 +52,8 @@ class JadwalUjianDataTable extends DataTable
      */
     public function query(JadwalUjian $model): QueryBuilder
     {
-        return $model->newQuery();
+        $ujianAktif = IdentitasUjian::where('status', 'aktif')->first();
+        return $model->newQuery()->where('kode_ujian', $ujianAktif->kode_ujian);
     }
 
     /**

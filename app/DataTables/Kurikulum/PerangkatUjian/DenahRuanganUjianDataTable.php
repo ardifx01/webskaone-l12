@@ -3,6 +3,7 @@
 namespace App\DataTables\Kurikulum\PerangkatUjian;
 
 use App\Models\Kurikulum\PerangkatUjian\DenahRuanganUjian;
+use App\Models\Kurikulum\PerangkatUjian\IdentitasUjian;
 use App\Traits\DatatableHelper;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -38,7 +39,8 @@ class DenahRuanganUjianDataTable extends DataTable
      */
     public function query(DenahRuanganUjian $model): QueryBuilder
     {
-        return $model->newQuery();
+        $ujianAktif = IdentitasUjian::where('status', 'aktif')->first();
+        return $model->newQuery()->where('kode_ujian', $ujianAktif->kode_ujian);
     }
 
     /**

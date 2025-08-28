@@ -11,6 +11,7 @@ use App\Models\WaliKelas\Ekstrakurikuler;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -22,7 +23,7 @@ class DataKelasController extends Controller
     public function index()
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -309,7 +310,7 @@ class DataKelasController extends Controller
     public function downloadDataSiswa()
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -393,7 +394,7 @@ class DataKelasController extends Controller
 
     public function downloadPDF()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil data yang sama seperti di view
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -442,7 +443,7 @@ class DataKelasController extends Controller
     public function downloadPDFRanking()
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')

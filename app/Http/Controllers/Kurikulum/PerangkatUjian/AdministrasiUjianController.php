@@ -25,6 +25,10 @@ class AdministrasiUjianController extends Controller
     {
         $identitasUjian = IdentitasUjian::where('status', 'Aktif')->first(); // Ambil 1 data aktif
 
+        if (!$identitasUjian) {
+            return redirect()->with('warning', 'Identitas Ujian tidak ditemukan.');
+        }
+
         $ruangs = RuangUjian::select('nomor_ruang')->distinct()->pluck('nomor_ruang');
 
         $rombels = DB::table('rombongan_belajars')->pluck('rombel', 'kode_rombel');
@@ -140,7 +144,104 @@ class AdministrasiUjianController extends Controller
             ->orderByRaw('CAST(kode_pengawas AS UNSIGNED) ASC')
             ->get();
 
+        /* $ujianAktif = IdentitasUjian::where('status', 'aktif')->first();
+
+        if (!$ujianAktif) {
+            return redirect()->back()->with('warning', 'Identitas Ujian tidak ditemukan.');
+        }
+
+        $kodeUjian = $ujianAktif->kode_ujian;
+
+        // --- Data dasar
+        $ruangs   = RuangUjian::where('kode_ujian', $kodeUjian)
+            ->orderByRaw('CAST(nomor_ruang AS UNSIGNED) ASC')
+            ->get();
+        $rombels  = RombonganBelajar::pluck('rombel', 'kode_rombel');
+
+        // --- Peserta ujian
+        $pesertaUjians = DB::table('peserta_ujians')
+            ->join('peserta_didiks', 'peserta_ujians.nis', '=', 'peserta_didiks.nis')
+            ->join('rombongan_belajars', 'peserta_ujians.kelas', '=', 'rombongan_belajars.kode_rombel')
+            ->where('peserta_ujians.kode_ujian', $kodeUjian)
+            ->select(
+                'peserta_ujians.*',
+                'peserta_didiks.nama_lengkap',
+                'rombongan_belajars.rombel'
+            )->get();
+
+        // --- Data ruang + hitung jumlah siswa
+        $dataRuang = $ruangs->map(function ($item) use ($ujianAktif, $kodeUjian) {
+            $kelasKiri  = RombonganBelajar::where('kode_rombel', $item->kelas_kiri)
+                ->where('tahunajaran', $ujianAktif->tahun_ajaran)->first();
+            $kelasKanan = RombonganBelajar::where('kode_rombel', $item->kelas_kanan)
+                ->where('tahunajaran', $ujianAktif->tahun_ajaran)->first();
+
+            $item->kelas_kiri_nama   = $kelasKiri->rombel ?? '-';
+            $item->kelas_kanan_nama  = $kelasKanan->rombel ?? '-';
+            $item->jumlah_siswa_kiri = DB::table('peserta_ujians')
+                ->where('kode_ujian', $kodeUjian)
+                ->where('kode_posisi_kelas', $item->kode_kelas_kiri)
+                ->where('posisi_duduk', 'kiri')->count();
+            $item->jumlah_siswa_kanan = DB::table('peserta_ujians')
+                ->where('kode_ujian', $kodeUjian)
+                ->where('kode_posisi_kelas', $item->kode_kelas_kanan)
+                ->where('posisi_duduk', 'kanan')->count();
+            $item->jumlah_total = $item->jumlah_siswa_kiri + $item->jumlah_siswa_kanan;
+
+            return $item; // ← tetap object asli RuangUjian + properti tambahan
+        });
+
+        // --- Peserta untuk rekap
+        $pesertaUjianTable = $pesertaUjians; // sudah diambil di atas
+
+        $rekapKelas = $pesertaUjianTable->groupBy('rombel')
+            ->map(function ($group, $rombel) {
+                $jumlahKiri  = $group->where('posisi_duduk', 'kiri')->count();
+                $jumlahKanan = $group->where('posisi_duduk', 'kanan')->count();
+                $ruang       = $group->pluck('nomor_ruang')->unique()->sort()->implode(', ');
+
+                return [
+                    'rombel'       => $rombel,
+                    'kelas'        => $group->first()->kelas,
+                    'jumlah_kiri'  => $jumlahKiri,
+                    'jumlah_kanan' => $jumlahKanan,
+                    'ruang'        => $ruang,
+                    'total'        => $group->count(),
+                ];
+            })->values();
+
+        // --- Tanggal ujian
+        $tanggalUjian = collect(CarbonPeriod::create($ujianAktif->tgl_ujian_awal, $ujianAktif->tgl_ujian_akhir))
+            ->map(fn($date) => $date->toDateString());
+
+        $tanggalUjianOption = $tanggalUjian->mapWithKeys(fn($date) => [
+            $date => Carbon::parse($date)->translatedFormat('l, d M Y')
+        ])->toArray();
+
+        // --- Pengawas
+        $pengawas = PengawasUjian::all()->groupBy(
+            fn($item) =>
+            "{$item->nomor_ruang}_{$item->tanggal_ujian}_{$item->jam_ke}"
+        );
+
+        $daftarPengawas = DaftarPengawasUjian::where('kode_ujian', $kodeUjian)
+            ->orderByRaw('CAST(kode_pengawas AS UNSIGNED) ASC')
+            ->get(); */
+
+
         return view('pages.kurikulum.perangkatujian.administrasi-ujian', [
+            /* 'ujianAktif'          => $ujianAktif, // identitasUjian diganti
+            'ruangs'              => $ruangs,
+            'pesertaUjians'       => $pesertaUjians,
+            'rombels'             => $rombels,
+            'dataRuang'           => $dataRuang,
+            'pesertaUjianTable'   => $pesertaUjianTable,
+            'rekapKelas'          => $rekapKelas,
+            'ruangUjian'          => $ruangs, // sama dengan $ruangs, kalau beda bisa tetap pakai variabel khusus
+            'tanggalUjian'        => $tanggalUjian,
+            'tanggalUjianOption'  => $tanggalUjianOption,
+            'pengawas'            => $pengawas,
+            'daftarPengawas'      => $daftarPengawas, */
             'identitasUjian' => $identitasUjian,
             'ruangs' => $ruangs,
             'pesertaUjians' => $pesertaUjians,

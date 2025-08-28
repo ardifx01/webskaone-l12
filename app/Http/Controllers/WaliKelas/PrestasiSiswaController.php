@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\WaliKelas\PrestasiSiswaRequest;
 use App\Models\ManajemenSekolah\TahunAjaran;
 use App\Models\WaliKelas\PrestasiSiswa;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,7 @@ class PrestasiSiswaController extends Controller
     public function index(PrestasiSiswaDataTable $prestasiSiswaDataTable)
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -86,7 +87,7 @@ class PrestasiSiswaController extends Controller
     public function create()
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif, beserta semester yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -183,7 +184,7 @@ class PrestasiSiswaController extends Controller
     public function show(PrestasiSiswa $prestasiSiswa)
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif, beserta semester yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
@@ -271,7 +272,7 @@ class PrestasiSiswaController extends Controller
     public function edit(PrestasiSiswa $prestasiSiswa)
     {
         // Ambil user yang sedang login
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Ambil tahun ajaran yang aktif, beserta semester yang aktif
         $tahunAjaranAktif = TahunAjaran::where('status', 'Aktif')
