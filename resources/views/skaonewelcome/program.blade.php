@@ -4,6 +4,11 @@
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{ URL::asset('build/assets/vendor/chosen/chosen.css') }}">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 @endsection
 @section('content')
     <!-- Promo Block -->
@@ -22,7 +27,16 @@
     </div>
     <!-- End Promo Block -->
     <!-- Program -->
-    <section class="container g-py-75">
+    <section id="kk-selector" class="container g-py-75">
+        <div class="container text-center g-mb-20">
+            <p>
+                @foreach ($kompetensiKeahlians as $kk)
+                    <a href="#kk-{{ $kk->idkk }}" class="btn btn-sm btn-outline-primary m-1">
+                        {{ $kk->nama_kk }}
+                    </a>
+                @endforeach
+            </p>
+        </div>
         @foreach ($kompetensiKeahlians as $kk)
             @include('skaonewelcome.program-tampil', ['kk' => $kk])
         @endforeach

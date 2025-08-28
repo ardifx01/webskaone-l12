@@ -1,9 +1,10 @@
+<div id="kk-{{ $kk->idkk }}" class="g-mb-100"></div>
 <section class="g-mb-10">
     <div class="container">
         <header class="text-center g-width-80x--md mx-auto g-mb-10">
             <div class="u-heading-v6-2 text-center text-uppercase g-mb-20">
                 <h6 class="g-font-size-12 g-font-weight-600">Kompetensi Keahlian</h6>
-                <h2 class="h3 u-heading-v6__title g-brd-primary g-color-gray-dark-v2 g-font-weight-600">
+                <h2 class="h3 u-heading-v6__title g-brd-primary g-color-primary g-font-weight-600">
                     {{ $kk->nama_kk }}
                 </h2>
             </div>
@@ -154,7 +155,7 @@
                         </div>
 
                         <div class="col-lg-4 col-md-4 g-mb-40 g-mb-0--lg">
-                            <h2 class="text-success g-font-weight-800">Prospek Kerja:</h2>
+                            <h2 class="g-color-primary g-font-weight-800">Prospek Kerja:</h2>
                             @if (isset($dataProfil[$kk->idkk]['prospek_kerja']))
                                 @foreach ($dataProfil[$kk->idkk]['prospek_kerja'] as $item)
                                     <x-variasi-ceklist-one>{{ $item->deskripsi }}</x-variasi-ceklist-one>
@@ -196,7 +197,11 @@
             </div>
         </div>
 
-        <hr class="g-brd-gray-light-v4 g-my-60">
+        <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-80">
+            <a href="#kk-selector">
+                <i class="fa fa-angle-up u-divider__icon g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
+            </a>
+        </div>
 
     </div>
 </section>
