@@ -151,7 +151,9 @@ class PesertaUjianController extends Controller
 
     public function getRuangUjian($nomor_ruang)
     {
-        $ruang = RuangUjian::where('nomor_ruang', $nomor_ruang)->first();
+        $kodeUjianAktif = IdentitasUjian::where('status', 'aktif')->value('kode_ujian');
+
+        $ruang = RuangUjian::where('nomor_ruang', $nomor_ruang)->where('kode_ujian', $kodeUjianAktif)->first();
 
         if ($ruang) {
             return response()->json([

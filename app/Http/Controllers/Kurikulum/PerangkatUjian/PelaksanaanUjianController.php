@@ -29,7 +29,7 @@ class PelaksanaanUjianController extends Controller
     {
         $identitasUjian = IdentitasUjian::where('status', 'Aktif')->first(); // Ambil 1 data aktif
 
-        $ruangs = RuangUjian::select('nomor_ruang')->distinct()->pluck('nomor_ruang');
+        $ruangs = RuangUjian::where('kode_ujian', $identitasUjian->kode_ujian)->select('nomor_ruang')->distinct()->pluck('nomor_ruang');
 
         $rombels = DB::table('rombongan_belajars')->pluck('rombel', 'kode_rombel');
 
