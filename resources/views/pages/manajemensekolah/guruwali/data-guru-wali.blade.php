@@ -17,7 +17,7 @@
                 <x-heading-title>@yield('title')</x-heading-title>
                 <div class="flex-shrink-0">
                     @if (auth()->check() &&
-                            auth()->user()->hasAnyRole(['master']))
+                            auth()->user()->hasAnyRole(['master', 'admin']))
                         <x-btn-tambah dinamisBtn="true" can="create manajemensekolah/data-guru-wali"
                             route="manajemensekolah.data-guru-wali.create" />
                     @endif
