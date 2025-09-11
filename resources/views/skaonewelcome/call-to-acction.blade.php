@@ -8,43 +8,45 @@
         </div>
         <!-- End Heading -->
 
-        <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
-            href="#!">Apply Now</a>
+        <div class="d-flex flex-wrap flex-md-nowrap align-items-center justify-content-center gap-2">
+            <!-- Apply Now -->
+            <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
+                href="#!">Apply Now</a>
 
-        <!-- SVG Shape -->
-        <svg class="d-inline-block g-width-35" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 37 1"
-            enable-background="new 0 0 37 1" xml:space="preserve">
-            <linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="0" y1="0.5" x2="37"
-                y2="0.5">
-                <stop offset="0" style="stop-color:#f5f6fa" />
-                <stop offset="1" style="stop-color:#b5b8cb" />
-            </linearGradient>
-            <line fill="none" stroke="url(#SVGID_5_)" stroke-miterlimit="10" x1="37" y1="0.5"
-                x2="0" y2="0.5" />
-        </svg>
-        <!-- End SVG Shape -->
+            <!-- SVG Shape + OR + SVG Shape (hanya muncul di layar md ke atas) -->
+            <div class="d-none d-md-flex align-items-center mx-2">
+                <!-- SVG Left -->
+                <svg class="d-inline-block g-width-35" viewBox="0 0 37 1" xmlns="http://www.w3.org/2000/svg">
+                    <linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="0" y1="0.5"
+                        x2="37" y2="0.5">
+                        <stop offset="0" style="stop-color:#f5f6fa" />
+                        <stop offset="1" style="stop-color:#b5b8cb" />
+                    </linearGradient>
+                    <line fill="none" stroke="url(#SVGID_5_)" stroke-miterlimit="10" x1="37" y1="0.5"
+                        x2="0" y2="0.5" />
+                </svg>
 
-        <span class="align-middle g-color-primary mx-1">or</span>
+                <span class="align-middle g-color-primary mx-2">or</span>
 
-        <!-- SVG Shape -->
-        <svg class="d-inline-block g-width-35" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 37 1"
-            enable-background="new 0 0 37 1" xml:space="preserve">
-            <linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="-10" y1="-1.5" x2="27"
-                y2="-1.5" gradientTransform="matrix(-1 0 0 -1 27 -1)">
-                <stop offset="0" style="stop-color:#f5f6fa" />
-                <stop offset="1" style="stop-color:#b5b8cb" />
-            </linearGradient>
-            <line fill="none" stroke="url(#SVGID_6_)" stroke-miterlimit="10" x1="0" y1="0.5"
-                x2="37" y2="0.5" />
-        </svg>
-        <!-- End SVG Shape -->
+                <!-- SVG Right -->
+                <svg class="d-inline-block g-width-35" viewBox="0 0 37 1" xmlns="http://www.w3.org/2000/svg">
+                    <linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="-10" y1="-1.5"
+                        x2="27" y2="-1.5" gradientTransform="matrix(-1 0 0 -1 27 -1)">
+                        <stop offset="0" style="stop-color:#f5f6fa" />
+                        <stop offset="1" style="stop-color:#b5b8cb" />
+                    </linearGradient>
+                    <line fill="none" stroke="url(#SVGID_6_)" stroke-miterlimit="10" x1="0" y1="0.5"
+                        x2="37" y2="0.5" />
+                </svg>
+            </div>
 
-        {{-- <a class="btn u-shadow-v32 g-color-primary g-color-white--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
-            href="#!">Contact Us</a> --}}
-        <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
-            href="#!">Contact Us</a>
+            <!-- OR (khusus layar kecil) -->
+            <span class="d-block d-md-none text-center w-100 my-2 g-color-primary">or</span>
+
+            <!-- Contact Us -->
+            <a class="btn u-shadow-v33 g-color-white g-bg-primary g-bg-main--hover g-rounded-30 g-px-55 g-py-8"
+                href="#!">Contact Us</a>
+        </div>
     </div>
 
     <!-- SVG Background Shape -->
